@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book a Session — Saenz Media Co.</title>
+<title>Book a Session - Saenz Media Co.</title>
 <link rel="icon" type="image/png" href="images/apple-touch-icon.png?v=2">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -230,6 +230,7 @@
   </button>
   <nav id="siteNav">
     <a href="index.html">Home</a>
+    <a href="engagements.html">Engagements</a>
     <a href="weddings.html">Weddings</a>
     <a href="family.html">Family</a>
     <a href="headshots.html">Headshots</a>
@@ -242,7 +243,7 @@
 <div class="hero">
   <div class="eyebrow">Booking Request</div>
   <h1>Let's book your date.</h1>
-  <p>Fill out the form below with a few details about what you need. I'll follow up within 1–2 business days with availability and next steps.</p>
+  <p>Fill out the form below with a few details about what you need. I'll follow up within 1-2 business days with availability and next steps.</p>
 </div>
 
 <div class="sprockets"></div>
@@ -291,7 +292,7 @@
 
   <div class="field">
     <label for="details">Details</label>
-    <textarea id="details" name="details" placeholder="Package interest, guest count, timeline — anything that helps me plan."></textarea>
+    <textarea id="details" name="details" placeholder="Package interest, guest count, timeline, anything that helps me plan."></textarea>
   </div>
 
   <button type="submit" class="submit">Send booking request</button>
@@ -313,15 +314,15 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
   const lines = [
     'Name: ' + f.name.value,
     'Email: ' + f.email.value,
-    'Phone: ' + (f.phone.value || '—'),
+    'Phone: ' + (f.phone.value || 'N/A'),
     'Session type: ' + sessionType,
-    'Preferred date: ' + (f.date.value || '—'),
-    'Location / venue: ' + (f.location.value || '—'),
+    'Preferred date: ' + (f.date.value || 'N/A'),
+    'Location / venue: ' + (f.location.value || 'N/A'),
     '',
     'Details:',
-    f.details.value || '—'
+    f.details.value || 'N/A'
   ];
-  const subject = encodeURIComponent('Booking Request — ' + sessionType);
+  const subject = encodeURIComponent('Booking Request - ' + sessionType);
   const body = encodeURIComponent(lines.join('\n'));
   window.location.href = 'mailto:saenzmediaco@gmail.com?subject=' + subject + '&body=' + body;
 });
