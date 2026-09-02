@@ -180,8 +180,8 @@ function track(event, params){
     const img = tile.querySelector('img');
     const cap = tile.querySelector('.cap');
     const thumbSrc = img.getAttribute('src');
-    const fullBase = thumbSrc.replace('images/', 'images/full/').replace(/\.(jpg|jpeg|png)$/i, '');
-    const exts = ['jpg', 'png', 'jpeg'];
+    const fullBase = thumbSrc.replace('images/', 'images/full/').replace(/\.(jpg|jpeg|png|webp)$/i, '');
+    const exts = ['webp', 'jpg', 'png', 'jpeg'];
     let i = 0;
     function tryNextExt(){
       if (i >= exts.length){ lightboxImg.onerror = null; lightboxImg.src = thumbSrc; return; }

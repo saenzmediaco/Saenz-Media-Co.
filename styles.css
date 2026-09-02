@@ -652,6 +652,7 @@ select option{background:var(--bg-2);color:var(--text);}
 .submit:disabled{opacity:0.6;cursor:default;}
 .submit:disabled:hover{background:var(--text);border-color:var(--text);}
 .form-note{margin-top:16px;font-size:0.72rem;color:var(--text-faint);text-align:center;}
+.form-note a{color:var(--accent);text-decoration:underline;}
 .form-status{margin-top:24px;font-size:0.92rem;line-height:1.6;text-align:center;}
 .form-status:empty{display:none;}
 .form-status.success{color:var(--accent);font-family:var(--serif);font-size:1.25rem;font-style:italic;}
