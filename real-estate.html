@@ -8,361 +8,139 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#FBF7EC;
-    --card:#FFFDF6;
-    --ink:#132A3A;
-    --ink-soft:#51697A;
-    --line:#D7E1E6;
-    --blue:#082A18;
-    --blue-deep:#062213;
-    --blue-accent:#1C7A4C;
-    --cream:#F2EFB3;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Work Sans',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;}
-
-  /* Masthead */
-  .masthead{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 6%;
-    background:var(--blue);
-    border-bottom:1px solid var(--blue-deep);
-    flex-wrap:wrap;
-    gap:12px;
-  }
-  .brand{
-    display:flex;
-    align-items:flex-start;
-    text-decoration:none;
-  }
-  .brand-tagline{margin-top:11px;}
-  .brand-logo{
-    height:40px;
-    width:auto;
-    display:block;
-    margin-top:3px;
-  }
-  .brand-tagline{
-    position:relative;
-    display:inline-block;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.68rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    text-decoration:none;
-    color:var(--cream);
-    padding-left:16px;
-    margin-left:16px;
-    white-space:nowrap;
-  }
-  .brand-tagline::before{
-    content:'';
-    position:absolute;
-    left:0;top:50%;
-    transform:translateY(-50%);
-    width:1px;
-    height:28px;
-    background:rgba(255,255,255,0.3);
-  }
-  .menu-toggle{
-    display:none;
-    background:none;border:none;cursor:pointer;
-    padding:4px;color:#fff;
-    align-items:center;justify-content:center;
-  }
-  .menu-toggle svg{width:24px;height:24px;}
-  nav{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-    flex:1 1 auto;
-    gap:10px 20px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.82rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-  }
-  nav a{text-decoration:none;color:rgba(255,255,255,0.8);padding-bottom:4px;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
-  nav a:hover{color:#fff;border-color:#fff;}
-  nav a.active{color:#fff;border-color:var(--cream);}
-
-  /* Hero */
-  .hero{padding:40px 6% 28px;max-width:920px;}
-  .eyebrow{
-    display:flex;align-items:center;gap:8px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;
-    color:var(--blue-accent);margin-bottom:22px;
-  }
-  .eyebrow::before{content:'';width:7px;height:7px;background:var(--blue-accent);border-radius:50%;display:inline-block;}
-  h1{
-    font-family:'Inter',sans-serif;
-    font-weight:900;
-    text-transform:uppercase;
-    font-size:clamp(38px,5.6vw,66px);
-    line-height:1.05;
-    margin:0 0 22px;
-    letter-spacing:-0.02em;
-  }
-  .hero p{
-    font-size:1.1rem;
-    line-height:1.6;
-    color:var(--ink-soft);
-    max-width:56ch;
-    margin:0;
-  }
-
-  /* Sprocket divider */
-  .sprockets{
-    height:8px;
-    margin:24px 6%;
-    background-image:radial-gradient(circle, var(--line) 2px, transparent 2.6px);
-    background-size:20px 100%;
-    background-repeat:repeat-x;
-    background-position:left center;
-  }
-
-  .market-note{
-    padding:0 6% 8px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.75rem;
-    color:var(--ink-soft);
-    font-style:italic;
-    max-width:60ch;
-  }
-
-  /* Pricing grid */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-    padding:16px 6% 20px;
-  }
-  .card{
-    position:relative;
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:46px 30px 34px;
-    display:flex;
-    flex-direction:column;
-    transition:transform .25s ease, box-shadow .25s ease;
-  }
-  .card:hover{transform:translateY(-6px);box-shadow:0 16px 32px rgba(27,26,23,0.12);}
-  .card::before{
-    content:'';position:absolute;top:14px;left:14px;width:20px;height:20px;
-    border-top:2px solid var(--ink);border-left:2px solid var(--ink);
-  }
-  .card::after{
-    content:'';position:absolute;bottom:14px;right:14px;width:20px;height:20px;
-    border-bottom:2px solid var(--ink);border-right:2px solid var(--ink);
-  }
-  .card.featured{background:var(--blue);color:#fff;border-color:var(--blue);}
-  .card.featured::before{border-color:#fff;}
-  .card.featured::after{border-color:#fff;}
-  .fstop{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.82rem;
-    letter-spacing:0.08em;
-    color:var(--blue-accent);
-    text-transform:uppercase;
-    margin-bottom:14px;
-  }
-  .card.featured .fstop{color:var(--cream);}
-  .badge{
-    position:absolute;top:14px;right:14px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
-    background:var(--cream);color:var(--ink);padding:4px 8px;
-  }
-  .tier{font-family:'Inter',sans-serif;font-weight:800;text-transform:uppercase;font-size:1.4rem;margin:0 0 6px;}
-  .price{
-    font-family:'IBM Plex Mono',monospace;font-size:2.4rem;font-weight:500;
-    margin:6px 0 4px;
-  }
-  .price-note{font-size:0.78rem;color:var(--ink-soft);margin-bottom:22px;}
-  .card.featured .price-note{color:#CFE9F5;}
-  .features{list-style:none;margin:0 0 30px;padding:0;flex-grow:1;}
-  .features li{
-    padding:9px 0;border-bottom:1px dashed var(--line);
-    font-size:0.94rem;line-height:1.4;
-  }
-  .card.featured .features li{border-bottom-color:rgba(255,255,255,0.28);}
-  .features li:last-child{border-bottom:none;}
-  .cta{
-    display:block;text-align:center;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;
-    padding:14px;border:1px solid var(--blue-accent);
-    text-decoration:none;color:var(--blue-accent);
-    transition:background .2s,color .2s;
-  }
-  .cta:hover{background:var(--blue);color:#fff;}
-  .card.featured .cta{border-color:var(--cream);color:var(--cream);}
-  .card.featured .cta:hover{background:var(--cream);color:var(--blue-accent);}
-
-  /* Spec sheet */
-  .specsheet{margin:56px 6% 90px;border:1px solid var(--line);}
-  .specsheet-head{
-    padding:16px 24px;border-bottom:1px solid var(--line);
-    font-family:'IBM Plex Mono',monospace;font-size:0.76rem;
-    letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);
-  }
-  .spec-row{
-    display:flex;justify-content:space-between;gap:20px;
-    padding:14px 24px;border-bottom:1px dashed var(--line);
-    font-size:0.95rem;
-  }
-  .spec-row:last-child{border-bottom:none;}
-  .spec-row span:last-child{font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);white-space:nowrap;}
-
-  footer{
-    background:var(--blue);
-    border-top:1px solid var(--blue-deep);
-    padding:26px 6%;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.75);
-  }
-  footer a{color:var(--cream);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
-  footer a:hover{color:#fff;border-color:#fff;}
-
-  @media (max-width:990px){
-    .menu-toggle{display:flex;}
-    nav{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:0;order:3;margin-top:12px;}
-    nav.open{display:flex;}
-    nav a{width:100%;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,0.25);}
-    nav a:last-child{border-bottom:none;}
-    .grid{grid-template-columns:1fr;}
-  }
-  @media (max-width:420px){
-    .brand-logo{height:32px;}
-  }
-  @media (max-width:340px){
-    .brand-tagline{
-      font-size:0.48rem;
-      letter-spacing:0.05em;
-      padding-left:10px;
-      margin-left:10px;
-    }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="masthead">
-  <a class="brand" href="index.html">
-    <img class="brand-logo" src="images/logo-mark.png" alt="Saenz Media Co.">
-    <span class="brand-tagline">Elevate Your Vision</span>
-  </a>
+<nav class="site-nav" id="siteNav">
+  <a class="nav-mark" href="index.html"><img class="nav-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co."></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="gallery.html">Gallery</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#about">About</a>
+    </div>
+    <a class="nav-cta" href="book.html">Start a Project</a>
+  </div>
   <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <span></span><span></span><span></span>
   </button>
-  <nav id="siteNav">
-    <a href="index.html">Home</a>
-    <a href="engagements.html">Engagements</a>
-    <a href="weddings.html">Weddings</a>
-    <a href="family.html">Family</a>
-    <a href="headshots.html">Headshots</a>
-    <a href="real-estate.html" class="active">Real Estate</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="book.html">Book</a>
-  </nav>
-</div>
+</nav>
 
-<div class="hero">
-  <div class="eyebrow">Real Estate Photo & Video</div>
-  <h1>Listings that get the click.</h1>
-  <p>HDR photography, cinematic walkthroughs, and drone coverage that help listings sell faster and for more. Next-day delivery, every time.</p>
-</div>
-
-<div class="sprockets"></div>
-
-
-<div class="grid">
-
-  <div class="card">
-    <div class="fstop">f/2.8 - Essential</div>
-    <h2 class="tier">Essential Photos</h2>
-    <div class="price">$175</div>
-    <div class="price-note">Starting price · up to 2,000 sq ft</div>
-    <ul class="features">
-      <li>25+ HDR-edited, MLS-ready photos</li>
-      <li>Next-day delivery</li>
-      <li>$30 per additional 500 sq ft</li>
-    </ul>
-    <a class="cta" href="mailto:saenzmediaco@gmail.com?subject=Real%20Estate%20Photo%20%26%20Video%20Inquiry%20%E2%80%94%20Essential%20Photos%20Package&body=Hi%21%20I%27m%20interested%20in%20the%20Essential%20Photos%20package%20for%20real%20estate%20photo%20%26%20video.%20Could%20you%20tell%20me%20more%20about%20availability%20and%20next%20steps%3F">Inquire</a>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="gallery.html">Gallery</a>
+  <a href="index.html#services">Services</a>
+  <a href="index.html#about">About</a>
+  <a class="btn btn-solid nav-cta" href="book.html">Start a Project</a>
+  <div class="mobile-menu-foot">
+    <span>Frederick, MD</span>
+    <span>@saenzmediaco</span>
   </div>
-
-  <div class="card featured">
-    <div class="badge">Most booked</div>
-    <div class="fstop">f/2.0 - Photo + Video</div>
-    <h2 class="tier">Photo + Video</h2>
-    <div class="price">$375</div>
-    <div class="price-note">Starting price · up to 2,500 sq ft</div>
-    <ul class="features">
-      <li>30+ HDR-edited photos</li>
-      <li>60-90 sec cinematic walkthrough video</li>
-      <li>Branded intro/outro with agent info</li>
-      <li>Next-day delivery</li>
-    </ul>
-    <a class="cta" href="mailto:saenzmediaco@gmail.com?subject=Real%20Estate%20Photo%20%26%20Video%20Inquiry%20%E2%80%94%20Photo%20%2B%20Video%20Package&body=Hi%21%20I%27m%20interested%20in%20the%20Photo%20%2B%20Video%20package%20for%20real%20estate%20photo%20%26%20video.%20Could%20you%20tell%20me%20more%20about%20availability%20and%20next%20steps%3F">Inquire</a>
-  </div>
-
-  <div class="card">
-    <div class="fstop">f/1.4 - Full Suite</div>
-    <h2 class="tier">Full Marketing Suite</h2>
-    <div class="price">$550</div>
-    <div class="price-note">Starting price · up to 3,000 sq ft</div>
-    <ul class="features">
-      <li>35+ HDR photos</li>
-      <li>Cinematic walkthrough video</li>
-      <li>Drone aerial photos & video</li>
-      <li>Simple floor plan</li>
-      <li>Next-day delivery · $50 per additional 500 sq ft</li>
-    </ul>
-    <a class="cta" href="mailto:saenzmediaco@gmail.com?subject=Real%20Estate%20Photo%20%26%20Video%20Inquiry%20%E2%80%94%20Full%20Marketing%20Suite%20Package&body=Hi%21%20I%27m%20interested%20in%20the%20Full%20Marketing%20Suite%20package%20for%20real%20estate%20photo%20%26%20video.%20Could%20you%20tell%20me%20more%20about%20availability%20and%20next%20steps%3F">Inquire</a>
-  </div>
-
 </div>
 
-<div class="specsheet">
-  <div class="specsheet-head">Add-ons</div>
-  <div class="spec-row"><span>Twilight / dusk photos</span><span>+$100</span></div>
-  <div class="spec-row"><span>Drone only</span><span>+$125</span></div>
-  <div class="spec-row"><span>Floor plan only</span><span>+$75</span></div>
-  <div class="spec-row"><span>Virtual staging</span><span>$40 / photo</span></div>
-  <div class="spec-row"><span>Rush same-day delivery</span><span>+$75</span></div>
-</div>
+<header class="hero hero-inner">
+  <div class="hero-media">
+    <img class="active" src="images/realestate-05.jpg" alt="Two-story house exterior with white siding and covered porch" loading="eager">
+  </div>
+  <div class="hero-scrim"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Real Estate Photo &amp; Video</div>
+    <h1>Listings that<br>get the click.</h1>
+    <p class="hero-sub">HDR photography, cinematic walkthroughs, and drone coverage that help listings sell faster and for more. Next-day delivery, every time.</p>
+  </div>
+</header>
 
-<footer>
-  <span>Frederick, MD · Serving the DMV</span>
-  <a href="mailto:saenzmediaco@gmail.com">saenzmediaco@gmail.com</a>
-  <a href="https://instagram.com/saenzmediaco" target="_blank" rel="noopener">@saenzmediaco</a>
-  <span>Real Estate - Rate Card</span>
+<section class="section-pad-sm">
+  <div class="container">
+
+    <div class="pricing-grid reveal">
+
+      <div class="price-card">
+        <div class="price-fstop">f/2.8</div>
+        <h2 class="price-tier">Essential Photos</h2>
+        <div class="price-amount">$175</div>
+        <div class="price-note">Starting price · up to 2,000 sq ft</div>
+        <ul class="price-features">
+          <li>25+ HDR-edited, MLS-ready photos</li>
+          <li>Next-day delivery</li>
+          <li>$30 per additional 500 sq ft</li>
+        </ul>
+        <a class="price-cta" href="mailto:saenzmediaco@gmail.com?subject=Real%20Estate%20Photo%20%26%20Video%20Inquiry%20%E2%80%94%20Essential%20Photos%20Package&body=Hi%21%20I%27m%20interested%20in%20the%20Essential%20Photos%20package%20for%20real%20estate%20photo%20%26%20video.%20Could%20you%20tell%20me%20more%20about%20availability%20and%20next%20steps%3F">Inquire</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge">Most booked</div>
+        <div class="price-fstop">f/2.0</div>
+        <h2 class="price-tier">Photo + Video</h2>
+        <div class="price-amount">$375</div>
+        <div class="price-note">Starting price · up to 2,500 sq ft</div>
+        <ul class="price-features">
+          <li>30+ HDR-edited photos</li>
+          <li>60-90 sec cinematic walkthrough video</li>
+          <li>Branded intro/outro with agent info</li>
+          <li>Next-day delivery</li>
+        </ul>
+        <a class="price-cta" href="mailto:saenzmediaco@gmail.com?subject=Real%20Estate%20Photo%20%26%20Video%20Inquiry%20%E2%80%94%20Photo%20%2B%20Video%20Package&body=Hi%21%20I%27m%20interested%20in%20the%20Photo%20%2B%20Video%20package%20for%20real%20estate%20photo%20%26%20video.%20Could%20you%20tell%20me%20more%20about%20availability%20and%20next%20steps%3F">Inquire</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-fstop">f/1.4</div>
+        <h2 class="price-tier">Full Marketing Suite</h2>
+        <div class="price-amount">$550</div>
+        <div class="price-note">Starting price · up to 3,000 sq ft</div>
+        <ul class="price-features">
+          <li>35+ HDR photos</li>
+          <li>Cinematic walkthrough video</li>
+          <li>Drone aerial photos & video</li>
+          <li>Simple floor plan</li>
+          <li>Next-day delivery · $50 per additional 500 sq ft</li>
+        </ul>
+        <a class="price-cta" href="mailto:saenzmediaco@gmail.com?subject=Real%20Estate%20Photo%20%26%20Video%20Inquiry%20%E2%80%94%20Full%20Marketing%20Suite%20Package&body=Hi%21%20I%27m%20interested%20in%20the%20Full%20Marketing%20Suite%20package%20for%20real%20estate%20photo%20%26%20video.%20Could%20you%20tell%20me%20more%20about%20availability%20and%20next%20steps%3F">Inquire</a>
+      </div>
+
+    </div>
+
+    <div class="specsheet reveal">
+      <div class="specsheet-head">Add-ons</div>
+      <div class="spec-row"><span>Twilight / dusk photos</span><span>+$100</span></div>
+      <div class="spec-row"><span>Drone only</span><span>+$125</span></div>
+      <div class="spec-row"><span>Floor plan only</span><span>+$75</span></div>
+      <div class="spec-row"><span>Virtual staging</span><span>$40 / photo</span></div>
+      <div class="spec-row"><span>Rush same-day delivery</span><span>+$75</span></div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div>
+      <img class="footer-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co.">
+      <div class="footer-tagline">Photography · Video · Creative Production</div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Explore</div>
+        <a href="gallery.html">Gallery</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="book.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <a href="mailto:saenzmediaco@gmail.com">saenzmediaco@gmail.com</a>
+        <a href="https://instagram.com/saenzmediaco" target="_blank" rel="noopener">@saenzmediaco</a>
+        <span>Frederick, MD · Serving the DMV</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© Saenz Media Co.</span>
+    <span>Frederick, MD &amp; the DMV</span>
+  </div>
 </footer>
 
-<script>
-(function(){
-  const menuToggle = document.getElementById('menuToggle');
-  const siteNav = document.getElementById('siteNav');
-  menuToggle.addEventListener('click', () => {
-    const isOpen = siteNav.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-})();
-</script>
-
+<script src="main.js"></script>
 </body>
 </html>

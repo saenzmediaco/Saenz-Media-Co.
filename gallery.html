@@ -8,534 +8,198 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#FBF7EC;
-    --card:#FFFDF6;
-    --ink:#132A3A;
-    --ink-soft:#51697A;
-    --line:#D7E1E6;
-    --blue:#082A18;
-    --blue-deep:#062213;
-    --blue-accent:#1C7A4C;
-    --cream:#F2EFB3;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Work Sans',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;}
-
-  /* Masthead */
-  .masthead{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 6%;
-    background:var(--blue);
-    border-bottom:1px solid var(--blue-deep);
-    flex-wrap:wrap;
-    gap:12px;
-  }
-  .brand{
-    display:flex;
-    align-items:flex-start;
-    text-decoration:none;
-  }
-  .brand-tagline{margin-top:11px;}
-  .brand-logo{
-    height:40px;
-    width:auto;
-    display:block;
-    margin-top:3px;
-  }
-  .brand-tagline{
-    position:relative;
-    display:inline-block;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.68rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    text-decoration:none;
-    color:var(--cream);
-    padding-left:16px;
-    margin-left:16px;
-    white-space:nowrap;
-  }
-  .brand-tagline::before{
-    content:'';
-    position:absolute;
-    left:0;top:50%;
-    transform:translateY(-50%);
-    width:1px;
-    height:28px;
-    background:rgba(255,255,255,0.3);
-  }
-  .menu-toggle{
-    display:none;
-    background:none;border:none;cursor:pointer;
-    padding:4px;color:#fff;
-    align-items:center;justify-content:center;
-  }
-  .menu-toggle svg{width:24px;height:24px;}
-  nav{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-    flex:1 1 auto;
-    gap:10px 20px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.82rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-  }
-  nav a{text-decoration:none;color:rgba(255,255,255,0.8);padding-bottom:4px;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
-  nav a:hover{color:#fff;border-color:#fff;}
-  nav a.active{color:#fff;border-color:var(--cream);}
-
-  /* Hero */
-  .hero{padding:40px 6% 44px;max-width:920px;}
-  .eyebrow{
-    display:flex;align-items:center;gap:8px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;
-    color:var(--blue-accent);margin-bottom:22px;
-  }
-  .eyebrow::before{content:'';width:7px;height:7px;background:var(--blue-accent);border-radius:50%;display:inline-block;}
-  h1{
-    font-family:'Inter',sans-serif;
-    font-weight:900;
-    text-transform:uppercase;
-    font-size:clamp(24px,6.4vw,58px);
-    line-height:1.08;
-    margin:0 0 22px;
-    letter-spacing:-0.02em;
-  }
-  .hero p{
-    font-size:1.1rem;
-    line-height:1.6;
-    color:var(--ink-soft);
-    max-width:56ch;
-    margin:0;
-  }
-
-  /* Sprocket divider */
-  .sprockets{
-    height:8px;
-    margin:44px 6%;
-    background-image:radial-gradient(circle, var(--line) 2px, transparent 2.6px);
-    background-size:20px 100%;
-    background-repeat:repeat-x;
-    background-position:left center;
-  }
-
-  .market-note{
-    padding:0 6% 8px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.75rem;
-    color:var(--ink-soft);
-    font-style:italic;
-    max-width:60ch;
-  }
-
-  /* Pricing grid */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-    padding:28px 6% 20px;
-  }
-  .card{
-    position:relative;
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:46px 30px 34px;
-    display:flex;
-    flex-direction:column;
-    transition:transform .25s ease, box-shadow .25s ease;
-  }
-  .card:hover{transform:translateY(-6px);box-shadow:0 16px 32px rgba(27,26,23,0.12);}
-  .card::before{
-    content:'';position:absolute;top:14px;left:14px;width:20px;height:20px;
-    border-top:2px solid var(--ink);border-left:2px solid var(--ink);
-  }
-  .card::after{
-    content:'';position:absolute;bottom:14px;right:14px;width:20px;height:20px;
-    border-bottom:2px solid var(--ink);border-right:2px solid var(--ink);
-  }
-  .card.featured{background:var(--blue);color:#fff;border-color:var(--blue);}
-  .card.featured::before{border-color:#fff;}
-  .card.featured::after{border-color:#fff;}
-  .fstop{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.82rem;
-    letter-spacing:0.08em;
-    color:var(--blue-accent);
-    text-transform:uppercase;
-    margin-bottom:14px;
-  }
-  .card.featured .fstop{color:var(--cream);}
-  .badge{
-    position:absolute;top:14px;right:14px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
-    background:var(--cream);color:var(--ink);padding:4px 8px;
-  }
-  .tier{font-family:'Inter',sans-serif;font-weight:800;text-transform:uppercase;font-size:1.4rem;margin:0 0 6px;}
-  .price{
-    font-family:'IBM Plex Mono',monospace;font-size:2.4rem;font-weight:500;
-    margin:6px 0 4px;
-  }
-  .price-note{font-size:0.78rem;color:var(--ink-soft);margin-bottom:22px;}
-  .card.featured .price-note{color:#CFE9F5;}
-  .features{list-style:none;margin:0 0 30px;padding:0;flex-grow:1;}
-  .features li{
-    padding:9px 0;border-bottom:1px dashed var(--line);
-    font-size:0.94rem;line-height:1.4;
-  }
-  .card.featured .features li{border-bottom-color:rgba(255,255,255,0.28);}
-  .features li:last-child{border-bottom:none;}
-  .cta{
-    display:block;text-align:center;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;
-    padding:14px;border:1px solid var(--blue-accent);
-    text-decoration:none;color:var(--blue-accent);
-    transition:background .2s,color .2s;
-  }
-  .cta:hover{background:var(--blue);color:#fff;}
-  .card.featured .cta{border-color:var(--cream);color:var(--cream);}
-  .card.featured .cta:hover{background:var(--cream);color:var(--blue-accent);}
-
-  /* Spec sheet */
-  .specsheet{margin:56px 6% 90px;border:1px solid var(--line);}
-  .specsheet-head{
-    padding:16px 24px;border-bottom:1px solid var(--line);
-    font-family:'IBM Plex Mono',monospace;font-size:0.76rem;
-    letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);
-  }
-  .spec-row{
-    display:flex;justify-content:space-between;gap:20px;
-    padding:14px 24px;border-bottom:1px dashed var(--line);
-    font-size:0.95rem;
-  }
-  .spec-row:last-child{border-bottom:none;}
-  .spec-row span:last-child{font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);white-space:nowrap;}
-
-  footer{
-    background:var(--blue);
-    border-top:1px solid var(--blue-deep);
-    padding:26px 6%;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.75);
-  }
-  footer a{color:var(--cream);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
-  footer a:hover{color:#fff;border-color:#fff;}
-
-  .grid4{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    padding:28px 6% 20px;
-  }
-  .nav-card{
-    position:relative;
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:40px 26px 30px;
-    display:flex;
-    flex-direction:column;
-    text-decoration:none;
-    color:var(--ink);
-    transition:border-color .2s, transform .25s ease, box-shadow .25s ease;
-  }
-  .nav-card:hover{border-color:var(--ink);transform:translateY(-6px);box-shadow:0 16px 32px rgba(27,26,23,0.12);}
-  .nav-card::before{
-    content:'';position:absolute;top:14px;left:14px;width:18px;height:18px;
-    border-top:2px solid var(--ink);border-left:2px solid var(--ink);
-  }
-  .nav-card::after{
-    content:'';position:absolute;bottom:14px;right:14px;width:18px;height:18px;
-    border-bottom:2px solid var(--ink);border-right:2px solid var(--ink);
-  }
-  .nav-card .tag{
-    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;
-    text-transform:uppercase;color:var(--blue-accent);margin-bottom:16px;
-  }
-  .nav-card h2{font-family:'Inter',sans-serif;font-weight:800;text-transform:uppercase;font-size:1.3rem;margin:0 0 10px;}
-  .nav-card p{font-size:0.88rem;line-height:1.55;color:var(--ink-soft);margin:0 0 22px;flex-grow:1;}
-  .nav-card .go{
-    font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.08em;
-    text-transform:uppercase;color:var(--ink);
-  }
-  .nav-card .go::after{content:' →';display:inline-block;transition:transform .25s ease;}
-  .nav-card:hover .go::after{transform:translateX(4px);}
-
-  .about{padding:60px 6% 20px;max-width:760px;}
-  .about h2{font-family:'Inter',sans-serif;font-weight:800;text-transform:uppercase;font-size:1.5rem;margin:0 0 14px;}
-  .about p{font-size:1rem;line-height:1.7;color:var(--ink-soft);margin:0;}
-
-  .filters{
-    display:flex;gap:10px;flex-wrap:wrap;
-    padding:0 6% 8px;
-  }
-  .filter-btn{
-    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
-    background:none;border:1px solid var(--line);color:var(--ink-soft);
-    padding:8px 16px;cursor:pointer;transition:all .2s;
-  }
-  .filter-btn:hover{border-color:var(--ink);color:var(--ink);}
-  .filter-btn.active{background:var(--ink);border-color:var(--ink);color:var(--paper);}
-
-  .gallery{
-    padding:28px 6% 70px;
-  }
-  .category-group{margin-bottom:44px;}
-  .category-group:last-child{margin-bottom:0;}
-  .category-head{
-    display:flex;align-items:baseline;gap:12px;
-    font-family:'IBM Plex Mono',monospace;font-size:0.78rem;
-    letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-soft);
-    border-bottom:1px solid var(--line);
-    padding-bottom:10px;margin:0 0 18px;
-  }
-  .category-head .count{color:var(--blue-accent);}
-  .category-grid{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-  }
-  .tile{
-    position:relative;
-    height:200px;
-    width:auto;
-    aspect-ratio:4/5;
-    flex:0 0 auto;
-    overflow:hidden;
-    margin:0;
-    background:repeating-linear-gradient(135deg, var(--card), var(--card) 10px, #EFEBE0 10px, #EFEBE0 20px);
-    border:1px solid var(--line);
-    display:flex;flex-direction:column;justify-content:flex-end;
-    padding:8px;
-    cursor:pointer;
-    transition:border-color .3s ease;
-  }
-  .tile img{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
-    transition:transform .5s ease;
-  }
-  .tile:hover img{transform:scale(1.07);}
-  .tile:hover{border-color:var(--ink);}
-  .tile::before{
-    content:'';position:absolute;top:6px;left:6px;width:10px;height:10px;
-    border-top:2px solid var(--ink-soft);border-left:2px solid var(--ink-soft);opacity:0.5;z-index:2;
-    transition:opacity .3s ease;
-  }
-  .tile::after{
-    content:'';position:absolute;bottom:6px;right:6px;width:10px;height:10px;
-    border-bottom:2px solid var(--ink-soft);border-right:2px solid var(--ink-soft);opacity:0.5;z-index:2;
-    transition:opacity .3s ease;
-  }
-  .tile:hover::before,.tile:hover::after{opacity:1;}
-  .tile .cap{
-    position:relative;z-index:1;
-    font-family:'IBM Plex Mono',monospace;font-size:0.66rem;letter-spacing:0.04em;
-    color:var(--ink-soft);background:var(--paper);padding:3px 7px;display:inline-block;
-    align-self:flex-start;
-  }
-  .tile .fname{
-    display:none;
-  }
-  .tile.wide{
-    aspect-ratio:3/2;
-  }
-
-
-  @media (max-width:990px){
-    .menu-toggle{display:flex;}
-    nav{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:0;order:3;margin-top:12px;}
-    nav.open{display:flex;}
-    nav a{width:100%;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,0.25);}
-    nav a:last-child{border-bottom:none;}
-    .grid{grid-template-columns:1fr;}
-    .grid4{grid-template-columns:1fr 1fr;}
-  }
-  @media (max-width:560px){
-    .grid4{grid-template-columns:1fr;}
-    .category-grid{gap:10px;}
-    .tile{height:140px;}
-  }
-
-  /* Lightbox */
-  .lightbox{
-    position:fixed;inset:0;z-index:100;
-    display:none;
-    align-items:center;justify-content:center;
-    padding:8vh 6vw;
-    background:rgba(19,42,58,0.94);
-    cursor:zoom-out;
-  }
-  .lightbox.active{display:flex;}
-  .lightbox img{
-    max-width:100%;max-height:100%;
-    object-fit:contain;
-    border:1px solid var(--line);
-    cursor:default;
-  }
-  .lightbox-close{
-    position:fixed;top:22px;right:6%;
-    font-family:'IBM Plex Mono',monospace;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;
-    color:var(--paper);cursor:pointer;
-    padding:8px 12px;border:1px solid var(--paper);
-    background:none;
-  }
-  .lightbox-cap{
-    position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
-    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
-    color:var(--paper);opacity:0.8;
-  }
-  @media (max-width:420px){
-    .brand-logo{height:32px;}
-  }
-  @media (max-width:340px){
-    .brand-tagline{
-      font-size:0.48rem;
-      letter-spacing:0.05em;
-      padding-left:10px;
-      margin-left:10px;
-    }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="masthead">
-  <a class="brand" href="index.html">
-    <img class="brand-logo" src="images/logo-mark.png" alt="Saenz Media Co.">
-    <span class="brand-tagline">Elevate Your Vision</span>
-  </a>
+<nav class="site-nav" id="siteNav">
+  <a class="nav-mark" href="index.html"><img class="nav-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co."></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="gallery.html">Gallery</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#about">About</a>
+    </div>
+    <a class="nav-cta" href="book.html">Start a Project</a>
+  </div>
   <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <span></span><span></span><span></span>
   </button>
-  <nav id="siteNav">
-    <a href="index.html">Home</a>
-    <a href="engagements.html">Engagements</a>
-    <a href="weddings.html">Weddings</a>
-    <a href="family.html">Family</a>
-    <a href="headshots.html">Headshots</a>
-    <a href="real-estate.html">Real Estate</a>
-    <a href="gallery.html" class="active">Gallery</a>
-    <a href="book.html">Book</a>
-  </nav>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="gallery.html">Gallery</a>
+  <a href="index.html#services">Services</a>
+  <a href="index.html#about">About</a>
+  <a class="btn btn-solid nav-cta" href="book.html">Start a Project</a>
+  <div class="mobile-menu-foot">
+    <span>Frederick, MD</span>
+    <span>@saenzmediaco</span>
+  </div>
 </div>
 
-<div class="hero">
-  <div class="eyebrow">Selected Work</div>
-  <h1>Gallery.</h1>
-  <p>A look at recent weddings, engagements, family sessions, headshots, and real estate listings. Filter by category below.</p>
-</div>
+<header class="hero hero-inner" style="padding-top:150px;">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Selected Work</div>
+    <h1>Gallery.</h1>
+    <p class="hero-sub">A look at recent weddings, engagements, family sessions, headshots, and real estate listings. Filter by category below.</p>
+  </div>
+</header>
 
-<div class="sprockets"></div>
+<section class="section-pad-sm">
+  <div class="container">
 
-<div class="filters">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="wedding">Weddings</button>
-  <button class="filter-btn" data-filter="engagement">Engagements</button>
-  <button class="filter-btn" data-filter="family">Family</button>
-  <button class="filter-btn" data-filter="headshot">Headshots</button>
-  <button class="filter-btn" data-filter="realestate">Real Estate</button>
-</div>
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="wedding">Weddings</button>
+      <button class="filter-btn" data-filter="engagement">Engagements</button>
+      <button class="filter-btn" data-filter="family">Family</button>
+      <button class="filter-btn" data-filter="headshot">Headshots</button>
+      <button class="filter-btn" data-filter="realestate">Real Estate</button>
+    </div>
 
-<div class="gallery">
+    <div class="gallery">
 
-  <div class="category-group" data-group="wedding">
-    <div class="category-head">Wedding <span class="count">(18)</span></div>
-    <div class="category-grid">
-      <div class="tile"><img src="images/wedding-01.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-02.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-03.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-04.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-05.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-06.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-07.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-08.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-09.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-10.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-11.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-12.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-13.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-14.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-15.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-16.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-17.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
-      <div class="tile"><img src="images/wedding-18.jpg" alt="Wedding photography"><span class="cap">Wedding</span></div>
+      <div class="category-group" data-group="wedding">
+        <div class="category-head">Wedding <span class="count">(26)</span></div>
+        <div class="category-grid">
+          <div class="g-tile"><img src="images/wedding-01.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-02.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-03.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-04.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-05.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-06.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-07.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-08.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-09.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-10.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-11.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-12.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-13.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-14.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-15.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-16.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-17.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-18.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-19.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-20.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-21.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-22.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-23.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-24.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-25.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+          <div class="g-tile"><img src="images/wedding-26.jpg" alt="Wedding photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Wedding</span></div>
+        </div>
+      </div>
+
+      <div class="category-group" data-group="family">
+        <div class="category-head">Family <span class="count">(13)</span></div>
+        <div class="category-grid">
+          <div class="g-tile"><img src="images/family-01.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-02.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-03.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-04.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-05.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-06.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-07.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-08.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-09.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-10.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-11.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-12.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+          <div class="g-tile"><img src="images/family-13.jpg" alt="Family photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Family</span></div>
+        </div>
+      </div>
+
+      <div class="category-group" data-group="headshot">
+        <div class="category-head">Headshot <span class="count">(5)</span></div>
+        <div class="category-grid">
+          <div class="g-tile"><img src="images/headshot-01.jpg" alt="Headshot photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Headshot</span></div>
+          <div class="g-tile"><img src="images/headshot-02.jpg" alt="Headshot photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Headshot</span></div>
+          <div class="g-tile"><img src="images/headshot-03.jpg" alt="Headshot photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Headshot</span></div>
+          <div class="g-tile"><img src="images/headshot-04.jpg" alt="Headshot photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Headshot</span></div>
+          <div class="g-tile"><img src="images/headshot-05.jpg" alt="Headshot photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Headshot</span></div>
+        </div>
+      </div>
+
+      <div class="category-group" data-group="engagement">
+        <div class="category-head">Engagement <span class="count">(29)</span></div>
+        <div class="category-grid">
+          <div class="g-tile"><img src="images/engagement-01.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-02.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-03.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-04.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-05.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-06.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-07.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-08.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-09.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-10.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-11.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-12.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-13.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-14.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-15.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-16.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-17.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-18.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-19.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-20.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-21.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-22.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-23.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-24.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-25.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-26.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-27.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-28.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+          <div class="g-tile"><img src="images/engagement-29.jpg" alt="Engagement photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Engagement</span></div>
+        </div>
+      </div>
+
+      <div class="category-group" data-group="realestate">
+        <div class="category-head">Real Estate <span class="count">(6)</span></div>
+        <div class="category-grid">
+          <div class="g-tile"><img src="images/realestate-01.jpg" alt="Real Estate photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Real Estate</span></div>
+          <div class="g-tile"><img src="images/realestate-02.jpg" alt="Real Estate photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Real Estate</span></div>
+          <div class="g-tile"><img src="images/realestate-03.jpg" alt="Real Estate photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Real Estate</span></div>
+          <div class="g-tile"><img src="images/realestate-04.jpg" alt="Real Estate photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Real Estate</span></div>
+          <div class="g-tile"><img src="images/realestate-05.jpg" alt="Real Estate photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Real Estate</span></div>
+          <div class="g-tile"><img src="images/realestate-06.jpg" alt="Real Estate photography" loading="lazy"><div class="g-tile-scrim"></div><span class="cap">Real Estate</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <div class="category-group" data-group="family">
-    <div class="category-head">Family <span class="count">(6)</span></div>
-    <div class="category-grid">
-      <div class="tile"><img src="images/family-01.jpg" alt="Family photography"><span class="cap">Family</span></div>
-      <div class="tile"><img src="images/family-02.jpg" alt="Family photography"><span class="cap">Family</span></div>
-      <div class="tile"><img src="images/family-03.jpg" alt="Family photography"><span class="cap">Family</span></div>
-      <div class="tile"><img src="images/family-04.jpg" alt="Family photography"><span class="cap">Family</span></div>
-      <div class="tile"><img src="images/family-05.jpg" alt="Family photography"><span class="cap">Family</span></div>
-      <div class="tile"><img src="images/family-06.jpg" alt="Family photography"><span class="cap">Family</span></div>
+<footer class="site-footer">
+  <div class="footer-top">
+    <div>
+      <img class="footer-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co.">
+      <div class="footer-tagline">Photography · Video · Creative Production</div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Explore</div>
+        <a href="gallery.html">Gallery</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="book.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <a href="mailto:saenzmediaco@gmail.com">saenzmediaco@gmail.com</a>
+        <a href="https://instagram.com/saenzmediaco" target="_blank" rel="noopener">@saenzmediaco</a>
+        <span>Frederick, MD · Serving the DMV</span>
+      </div>
     </div>
   </div>
-
-  <div class="category-group" data-group="headshot">
-    <div class="category-head">Headshot <span class="count">(4)</span></div>
-    <div class="category-grid">
-      <div class="tile"><img src="images/headshot-01.jpg" alt="Headshot photography"><span class="cap">Headshot</span></div>
-      <div class="tile"><img src="images/headshot-02.jpg" alt="Headshot photography"><span class="cap">Headshot</span></div>
-      <div class="tile"><img src="images/headshot-03.jpg" alt="Headshot photography"><span class="cap">Headshot</span></div>
-      <div class="tile"><img src="images/headshot-04.jpg" alt="Headshot photography"><span class="cap">Headshot</span></div>
-    </div>
+  <div class="footer-bottom">
+    <span>© Saenz Media Co.</span>
+    <span>Frederick, MD &amp; the DMV</span>
   </div>
-
-  <div class="category-group" data-group="engagement">
-    <div class="category-head">Engagement <span class="count">(11)</span></div>
-    <div class="category-grid">
-      <div class="tile"><img src="images/engagement-01.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-      <div class="tile"><img src="images/engagement-02.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-      <div class="tile"><img src="images/engagement-03.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-      <div class="tile"><img src="images/engagement-04.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-      <div class="tile"><img src="images/engagement-05.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-      <div class="tile"><img src="images/engagement-06.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-      <div class="tile"><img src="images/engagement-07.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-      <div class="tile"><img src="images/engagement-08.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-      <div class="tile"><img src="images/engagement-09.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-      <div class="tile"><img src="images/engagement-10.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-      <div class="tile"><img src="images/engagement-11.jpg" alt="Engagement photography"><span class="cap">Engagement</span></div>
-    </div>
-  </div>
-
-  <div class="category-group" data-group="realestate">
-    <div class="category-head">Real Estate <span class="count">(6)</span></div>
-    <div class="category-grid">
-      <div class="tile"><img src="images/realestate-01.jpg" alt="Real estate photography"><span class="cap">Real Estate</span></div>
-      <div class="tile"><img src="images/realestate-02.jpg" alt="Real estate photography"><span class="cap">Real Estate</span></div>
-      <div class="tile"><img src="images/realestate-03.jpg" alt="Real estate photography"><span class="cap">Real Estate</span></div>
-      <div class="tile"><img src="images/realestate-04.jpg" alt="Real estate photography"><span class="cap">Real Estate</span></div>
-      <div class="tile"><img src="images/realestate-05.jpg" alt="Real estate photography"><span class="cap">Real Estate</span></div>
-      <div class="tile"><img src="images/realestate-06.jpg" alt="Real estate photography"><span class="cap">Real Estate</span></div>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  <span>Frederick, MD · Serving the DMV</span>
-  <a href="mailto:saenzmediaco@gmail.com">saenzmediaco@gmail.com</a>
-  <a href="https://instagram.com/saenzmediaco" target="_blank" rel="noopener">@saenzmediaco</a>
-  <span>Gallery</span>
 </footer>
 
 <div class="lightbox" id="lightbox">
@@ -544,76 +208,6 @@
   <div class="lightbox-cap" id="lightboxCap"></div>
 </div>
 
-<script>
-document.querySelectorAll('.tile img').forEach(img => {
-  const markIfWide = () => {
-    if (img.naturalWidth > img.naturalHeight) {
-      img.closest('.tile').classList.add('wide');
-    }
-  };
-  if (img.complete) markIfWide();
-  else img.addEventListener('load', markIfWide);
-});
-
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    document.querySelectorAll('.category-group').forEach(group => {
-      group.style.display = (filter === 'all' || group.dataset.group === filter) ? '' : 'none';
-    });
-  });
-});
-
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-const lightboxCap = document.getElementById('lightboxCap');
-
-function openLightbox(tile){
-  const img = tile.querySelector('img');
-  const cap = tile.querySelector('.cap');
-  const thumbSrc = img.getAttribute('src');
-  const fullBase = thumbSrc.replace('images/', 'images/full/').replace(/\.(jpg|jpeg|png)$/i, '');
-  const exts = ['jpg', 'png', 'jpeg'];
-  let i = 0;
-  function tryNextExt(){
-    if (i >= exts.length){ lightboxImg.onerror = null; lightboxImg.src = thumbSrc; return; }
-    lightboxImg.onerror = () => { i++; tryNextExt(); };
-    lightboxImg.src = fullBase + '.' + exts[i];
-  }
-  tryNextExt();
-  lightboxImg.alt = img.alt;
-  lightboxCap.textContent = cap ? cap.textContent : '';
-  lightbox.classList.add('active');
-}
-function closeLightbox(){
-  lightbox.classList.remove('active');
-  lightboxImg.src = '';
-}
-
-document.querySelectorAll('.tile').forEach(tile => {
-  tile.addEventListener('click', () => openLightbox(tile));
-});
-document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', e => {
-  if (e.target === lightbox) closeLightbox();
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeLightbox();
-});
-</script>
-
-<script>
-(function(){
-  const menuToggle = document.getElementById('menuToggle');
-  const siteNav = document.getElementById('siteNav');
-  menuToggle.addEventListener('click', () => {
-    const isOpen = siteNav.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-})();
-</script>
-
+<script src="main.js"></script>
 </body>
 </html>

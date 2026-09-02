@@ -19,673 +19,303 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#fcfafa;
-    --card:#FFFFFF;
-    --ink:#132A3A;
-    --ink-soft:#51697A;
-    --line:#D7E1E6;
-    --blue:#082A18;
-    --blue-deep:#062213;
-    --blue-accent:#1C7A4C;
-    --cream:#F2EFB3;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Work Sans',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;}
-
-  /* Masthead */
-  .masthead{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 6%;
-    background:var(--blue);
-    border-bottom:1px solid var(--blue-deep);
-    flex-wrap:wrap;
-    gap:12px;
-  }
-  .brand{
-    display:flex;
-    align-items:flex-start;
-    text-decoration:none;
-  }
-  .brand-tagline{margin-top:11px;}
-  .brand-logo{
-    height:40px;
-    width:auto;
-    display:block;
-    margin-top:3px;
-  }
-  .brand-tagline{
-    position:relative;
-    display:inline-block;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.68rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    text-decoration:none;
-    color:var(--cream);
-    padding-left:16px;
-    margin-left:16px;
-    white-space:nowrap;
-  }
-  .brand-tagline::before{
-    content:'';
-    position:absolute;
-    left:0;top:50%;
-    transform:translateY(-50%);
-    width:1px;
-    height:28px;
-    background:rgba(255,255,255,0.3);
-  }
-  .menu-toggle{
-    display:none;
-    background:none;border:none;cursor:pointer;
-    padding:4px;color:#fff;
-    align-items:center;justify-content:center;
-  }
-  .menu-toggle svg{width:24px;height:24px;}
-  nav{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-    flex:1 1 auto;
-    gap:8px 16px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.78rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-  }
-  nav a{text-decoration:none;color:rgba(255,255,255,0.8);padding-bottom:4px;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
-  nav a:hover{color:#fff;border-color:#fff;}
-  nav a.active{color:#fff;border-color:var(--cream);}
-
-  /* Hero */
-  .hero{padding:40px 6% 44px;max-width:1100px;}
-  .eyebrow{
-    display:flex;align-items:center;gap:8px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;
-    color:var(--blue-accent);margin-bottom:22px;
-  }
-  .eyebrow::before{content:'';width:7px;height:7px;background:var(--blue-accent);border-radius:50%;display:inline-block;}
-  h1{
-    font-family:'Inter',sans-serif;
-    font-weight:900;
-    text-transform:uppercase;
-    font-size:clamp(24px,6.4vw,58px);
-    line-height:1.08;
-    margin:0 0 22px;
-    letter-spacing:-0.02em;
-  }
-  .hero p{
-    font-size:1.1rem;
-    line-height:1.6;
-    color:var(--ink-soft);
-    max-width:56ch;
-    margin:0;
-  }
-
-  /* Hero banner filmstrip */
-  .banner{
-    position:relative;
-  }
-  .banner-track{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-  }
-  .banner-tile{
-    position:relative;
-    aspect-ratio:3/4;
-    overflow:hidden;
-    background:var(--ink);
-  }
-  .tile-slide{
-    position:absolute;inset:0;
-    opacity:0;
-    transition:opacity 1.1s ease;
-  }
-  .tile-slide.active{opacity:1;}
-  .tile-slide img{
-    width:100%;height:100%;object-fit:cover;display:block;
-  }
-  .tile-cap{
-    position:absolute;left:10px;bottom:10px;z-index:2;
-    display:flex;align-items:center;gap:6px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;
-    color:#fff;
-    background:rgba(19,42,58,0.6);
-    padding:5px 9px;
-  }
-  .tile-cap::before{content:'';width:5px;height:5px;background:var(--cream);border-radius:50%;flex-shrink:0;}
-  .banner-more{
-    display:inline-block;margin:14px 6% 0;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
-    color:var(--ink);text-decoration:none;
-    border-bottom:1px solid var(--ink-soft);
-    padding-bottom:2px;
-    transition:border-color .2s;
-  }
-  .banner-more:hover{border-color:var(--ink);}
-
-  /* Sprocket divider */
-  .sprockets{
-    height:8px;
-    margin:44px 6%;
-    background-image:radial-gradient(circle, var(--line) 2px, transparent 2.6px);
-    background-size:20px 100%;
-    background-repeat:repeat-x;
-    background-position:left center;
-  }
-
-  .market-note{
-    padding:0 6% 8px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.75rem;
-    color:var(--ink-soft);
-    font-style:italic;
-    max-width:60ch;
-  }
-
-  /* Pricing grid */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-    padding:28px 6% 20px;
-  }
-  .card{
-    position:relative;
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:46px 30px 34px;
-    display:flex;
-    flex-direction:column;
-    transition:transform .25s ease, box-shadow .25s ease;
-  }
-  .card:hover{transform:translateY(-6px);box-shadow:0 16px 32px rgba(27,26,23,0.12);}
-  .card::before{
-    content:'';position:absolute;top:14px;left:14px;width:20px;height:20px;
-    border-top:2px solid var(--ink);border-left:2px solid var(--ink);
-  }
-  .card::after{
-    content:'';position:absolute;bottom:14px;right:14px;width:20px;height:20px;
-    border-bottom:2px solid var(--ink);border-right:2px solid var(--ink);
-  }
-  .card.featured{background:var(--blue);color:#fff;border-color:var(--blue);}
-  .card.featured::before{border-color:#fff;}
-  .card.featured::after{border-color:#fff;}
-  .fstop{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.82rem;
-    letter-spacing:0.08em;
-    color:var(--blue-accent);
-    text-transform:uppercase;
-    margin-bottom:14px;
-  }
-  .card.featured .fstop{color:var(--cream);}
-  .badge{
-    position:absolute;top:14px;right:14px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
-    background:var(--cream);color:var(--ink);padding:4px 8px;
-  }
-  .tier{font-family:'Inter',sans-serif;font-weight:800;text-transform:uppercase;font-size:1.4rem;margin:0 0 6px;}
-  .price{
-    font-family:'IBM Plex Mono',monospace;font-size:2.4rem;font-weight:500;
-    margin:6px 0 4px;
-  }
-  .price-note{font-size:0.78rem;color:var(--ink-soft);margin-bottom:22px;}
-  .card.featured .price-note{color:#CFE9F5;}
-  .features{list-style:none;margin:0 0 30px;padding:0;flex-grow:1;}
-  .features li{
-    padding:9px 0;border-bottom:1px dashed var(--line);
-    font-size:0.94rem;line-height:1.4;
-  }
-  .card.featured .features li{border-bottom-color:rgba(255,255,255,0.28);}
-  .features li:last-child{border-bottom:none;}
-  .cta{
-    display:block;text-align:center;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;
-    padding:14px;border:1px solid var(--blue-accent);
-    text-decoration:none;color:var(--blue-accent);
-    transition:background .2s,color .2s;
-  }
-  .cta:hover{background:var(--blue);color:#fff;}
-  .card.featured .cta{border-color:var(--cream);color:var(--cream);}
-  .card.featured .cta:hover{background:var(--cream);color:var(--blue-accent);}
-
-  /* Spec sheet */
-  .specsheet{margin:56px 6% 90px;border:1px solid var(--line);}
-  .specsheet-head{
-    padding:16px 24px;border-bottom:1px solid var(--line);
-    font-family:'IBM Plex Mono',monospace;font-size:0.76rem;
-    letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);
-  }
-  .spec-row{
-    display:flex;justify-content:space-between;gap:20px;
-    padding:14px 24px;border-bottom:1px dashed var(--line);
-    font-size:0.95rem;
-  }
-  .spec-row:last-child{border-bottom:none;}
-  .spec-row span:last-child{font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);white-space:nowrap;}
-
-  footer{
-    background:var(--blue);
-    border-top:1px solid var(--blue-deep);
-    padding:26px 6%;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.75);
-  }
-  footer a{color:var(--cream);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
-  footer a:hover{color:#fff;border-color:#fff;}
-
-  .grid4{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:20px;
-    padding:28px 6% 20px;
-  }
-  .nav-card{
-    position:relative;
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:40px 26px 30px;
-    display:flex;
-    flex-direction:column;
-    text-decoration:none;
-    color:var(--ink);
-    transition:border-color .2s, transform .25s ease, box-shadow .25s ease;
-  }
-  .nav-card:hover{border-color:var(--ink);transform:translateY(-6px);box-shadow:0 16px 32px rgba(27,26,23,0.12);}
-  .nav-card::before{
-    content:'';position:absolute;top:14px;left:14px;width:18px;height:18px;
-    border-top:2px solid var(--ink);border-left:2px solid var(--ink);
-  }
-  .nav-card::after{
-    content:'';position:absolute;bottom:14px;right:14px;width:18px;height:18px;
-    border-bottom:2px solid var(--ink);border-right:2px solid var(--ink);
-  }
-  .nav-card .tag{
-    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;
-    text-transform:uppercase;color:var(--blue-accent);margin-bottom:16px;
-  }
-  .nav-card h2{font-family:'Inter',sans-serif;font-weight:800;text-transform:uppercase;font-size:1.3rem;margin:0 0 10px;}
-  .nav-card p{font-size:0.88rem;line-height:1.55;color:var(--ink-soft);margin:0 0 22px;flex-grow:1;}
-  .nav-card .go{
-    font-family:'IBM Plex Mono',monospace;font-size:0.74rem;letter-spacing:0.08em;
-    text-transform:uppercase;color:var(--ink);
-  }
-  .nav-card .go::after{content:' →';display:inline-block;transition:transform .25s ease;}
-  .nav-card:hover .go::after{transform:translateX(4px);}
-
-  .about{
-    padding:60px 6% 20px;
-    display:flex;
-    align-items:flex-start;
-    gap:48px;
-  }
-  .about-photos{display:flex;flex-direction:row;gap:16px;}
-  .about-photo-wrap{flex:0 0 130px;display:flex;flex-direction:column;gap:10px;}
-  .about-photo{
-    position:relative;
-    width:100%;
-    aspect-ratio:3/4;
-    overflow:hidden;
-    border:1px solid var(--line);
-  }
-  .about-photo img{width:100%;height:100%;object-fit:cover;display:block;}
-  .about-photo::before{
-    content:'';position:absolute;top:12px;left:12px;width:18px;height:18px;
-    border-top:2px solid var(--paper);border-left:2px solid var(--paper);
-  }
-  .about-photo::after{
-    content:'';position:absolute;bottom:12px;right:12px;width:18px;height:18px;
-    border-bottom:2px solid var(--paper);border-right:2px solid var(--paper);
-  }
-  .about-name{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;
-    color:var(--ink-soft);text-align:center;
-  }
-  .about-text{flex:1 1 auto;margin-top:-5px;}
-  .about h2{font-family:'Inter',sans-serif;font-weight:800;text-transform:uppercase;font-size:1.5rem;margin:0 0 14px;}
-  .about p{font-size:1rem;line-height:1.7;color:var(--ink-soft);margin:0 0 14px;}
-  .about p:last-child{margin:0;}
-
-  @media (max-width:1060px){
-    .menu-toggle{display:flex;}
-    nav{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:0;order:3;margin-top:12px;}
-    nav.open{display:flex;}
-    nav a{width:100%;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,0.25);}
-    nav a:last-child{border-bottom:none;}
-    .grid{grid-template-columns:1fr;}
-    .grid4{grid-template-columns:1fr 1fr;}
-    .about-photos{flex:0 0 100px;flex-direction:column;gap:14px;}
-    .about-photo-wrap{flex:0 0 auto;}
-  }
-  @media (max-width:560px){
-    .grid4{grid-template-columns:1fr;}
-  }
-  @media (max-width:420px){
-    .brand-logo{height:32px;}
-  }
-  @media (max-width:340px){
-    .brand-tagline{
-      font-size:0.48rem;
-      letter-spacing:0.05em;
-      padding-left:10px;
-      margin-left:10px;
-    }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="masthead">
-  <a class="brand" href="index.html">
-    <img class="brand-logo" src="images/logo-mark.png" alt="Saenz Media Co.">
-    <span class="brand-tagline">Elevate Your Vision</span>
-  </a>
+<nav class="site-nav" id="siteNav">
+  <a class="nav-mark" href="index.html"><img class="nav-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co."></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="gallery.html">Gallery</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#about">About</a>
+    </div>
+    <a class="nav-cta" href="book.html">Start a Project</a>
+  </div>
   <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <span></span><span></span><span></span>
   </button>
-  <nav id="siteNav">
- <a href="index.html" class="active">Home</a>
-    <a href="engagements.html">Engagements</a>
-    <a href="weddings.html">Weddings</a>
-    <a href="family.html">Family</a>
-    <a href="headshots.html">Headshots</a>
-    <a href="real-estate.html">Real Estate</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="book.html">Book</a>
-  </nav>
-</div>
+</nav>
 
-<div class="hero">
-  <div class="eyebrow">Photo & Video</div>
-  <h1>Frederick, MD & the DMV.</h1>
-  <p>Weddings, family sessions, headshots, and real estate media. Shot, edited, and delivered. Pick a service below to see pricing.</p>
-</div>
-
-<div class="banner" id="banner">
-  <div class="banner-track">
-    <div class="banner-tile">
-      <div class="tile-slide active">
-        <img src="images/engagement-04.jpg" alt="Engagement photography">
-        <div class="tile-cap">Engagement</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/headshot-02.jpg" alt="Professional headshot portrait">
-        <div class="tile-cap">Headshot</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/family-01.jpg" alt="Family posing with a mariachi band">
-        <div class="tile-cap">Family</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/headshot-01.jpg" alt="Professional headshot portrait in front of a landmark">
-        <div class="tile-cap">Headshot</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/engagement-08.jpg" alt="Engagement photography">
-        <div class="tile-cap">Engagement</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/full/wedding-11.jpg" alt="Bride and groom walking down the aisle at their wedding reception">
-        <div class="tile-cap">Wedding</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/family-02.jpg" alt="Family celebrating together with live mariachi music">
-        <div class="tile-cap">Family</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/engagement-01.jpg" alt="Engaged couple laughing together in the woods">
-        <div class="tile-cap">Engagement</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/realestate-01.jpg" alt="Real estate nursery room photo">
-        <div class="tile-cap">Real Estate</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/full/wedding-07.jpg" alt="Bride and groom smiling on stage at their reception">
-        <div class="tile-cap">Wedding</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/engagement-09.jpg" alt="Engagement photography">
-        <div class="tile-cap">Engagement</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/realestate-02.jpg" alt="Real estate photography">
-        <div class="tile-cap">Real Estate</div>
-      </div>
-    </div>
-    <div class="banner-tile">
-      <div class="tile-slide active">
-        <img src="images/full/wedding-05.jpg" alt="Bride and groom portrait at their wedding">
-        <div class="tile-cap">Wedding</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/engagement-02.jpg" alt="Engagement proposal in a Frederick, MD park">
-        <div class="tile-cap">Engagement</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/realestate-04.jpg" alt="Real estate photography">
-        <div class="tile-cap">Real Estate</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/full/wedding-04.jpg" alt="Bride and groom laughing together outside their wedding venue">
-        <div class="tile-cap">Wedding</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/family-03.jpg" alt="Family lifting a child in the air together outdoors">
-        <div class="tile-cap">Family</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/realestate-03.jpg" alt="Real estate photography">
-        <div class="tile-cap">Real Estate</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/headshot-03.jpg" alt="Professional headshot portrait">
-        <div class="tile-cap">Headshot</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/full/wedding-13.jpg" alt="Bride and groom portrait in a field">
-        <div class="tile-cap">Wedding</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/engagement-03.jpg" alt="Engaged couple silhouetted against the sunset">
-        <div class="tile-cap">Engagement</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/family-04.jpg" alt="Family photography">
-        <div class="tile-cap">Family</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/full/wedding-09.jpg" alt="Bride and groom portrait at their wedding">
-        <div class="tile-cap">Wedding</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/headshot-04.jpg" alt="Professional headshot portrait in front of a landmark">
-        <div class="tile-cap">Headshot</div>
-      </div>
-    </div>
-    <div class="banner-tile">
-      <div class="tile-slide active">
-        <img src="images/realestate-06.jpg" alt="Real estate photography">
-        <div class="tile-cap">Real Estate</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/full/wedding-17.jpg" alt="Bride and groom sharing an embrace">
-        <div class="tile-cap">Wedding</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/engagement-07.jpg" alt="Engagement photography">
-        <div class="tile-cap">Engagement</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/realestate-05.jpg" alt="Two-story house exterior with white siding and covered porch">
-        <div class="tile-cap">Real Estate</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/engagement-06.jpg" alt="Engaged couple sitting together in a garden">
-        <div class="tile-cap">Engagement</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/full/wedding-01.jpg" alt="Bride and groom portrait at their wedding">
-        <div class="tile-cap">Wedding</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/engagement-05.jpg" alt="Engagement photography">
-        <div class="tile-cap">Engagement</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/family-05.jpg" alt="Family photography">
-        <div class="tile-cap">Family</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/full/wedding-15.jpg" alt="Wedding party celebrating together">
-        <div class="tile-cap">Wedding</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/engagement-11.jpg" alt="Engagement photography">
-        <div class="tile-cap">Engagement</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/family-06.jpg" alt="Family photography">
-        <div class="tile-cap">Family</div>
-      </div>
-      <div class="tile-slide">
-        <img src="images/engagement-10.jpg" alt="Engagement photography">
-        <div class="tile-cap">Engagement</div>
-      </div>
-    </div>
-  </div>
-  <a class="banner-more" href="gallery.html">Full gallery →</a>
-</div>
-
-<div class="sprockets"></div>
-
-<div class="grid4">
-
-  <a class="nav-card" href="engagements.html">
-    <div class="tag">From $250</div>
-    <h2>Engagements</h2>
-    <p>Relaxed, romantic sessions to celebrate this season of your story before the big day.</p>
-    <div class="go">View pricing</div>
-  </a>
-
-  <a class="nav-card" href="weddings.html">
-    <div class="tag">From $1,650</div>
-    <h2>Weddings</h2>
-    <p>Full-day coverage, engagement sessions, and albums for the day you'll want to relive.</p>
-    <div class="go">View pricing</div>
-  </a>
-
-  <a class="nav-card" href="family.html">
-    <div class="tag">From $175</div>
-    <h2>Family</h2>
-    <p>Relaxed sessions built around your family's actual rhythm: golden hour, giggles, and all.</p>
-    <div class="go">View pricing</div>
-  </a>
-
-  <a class="nav-card" href="headshots.html">
-    <div class="tag">From $150</div>
-    <h2>Headshots</h2>
-    <p>Confident, polished headshots for LinkedIn, teams, and personal branding.</p>
-    <div class="go">View pricing</div>
-  </a>
-
-  <a class="nav-card" href="real-estate.html">
-    <div class="tag">From $175</div>
-    <h2>Real Estate</h2>
-    <p>HDR photos, cinematic walkthroughs, and drone coverage that help listings sell faster.</p>
-    <div class="go">View pricing</div>
-  </a>
-
-</div>
-
-<div class="about">
-  <div class="about-photos">
-    <div class="about-photo-wrap">
-      <div class="about-photo">
-        <img src="images/about-gigi.jpg" alt="Gigi Saenz, founder and photographer at Saenz Media Co.">
-      </div>
-      <div class="about-name">Gigi Saenz</div>
-    </div>
-    <div class="about-photo-wrap">
-      <div class="about-photo">
-        <img src="images/about-yelsin.jpg" alt="Yelsin Saenz, Saenz Media Co.">
-      </div>
-      <div class="about-name">Yelsin Saenz</div>
-    </div>
-  </div>
-  <div class="about-text">
-    <h2>About us</h2>
-    <p>We're Saenz Media Co., a small, dedicated team based in Frederick, MD, serving the greater DMV.</p>
-    <p>We started this because we genuinely love capturing the moments people actually want to hold onto. Weddings, growing families, headshots that actually look like you, listings that need to shine. We bring the same care and attention to every shoot, no matter the size.</p>
-    <p>Every package is built to be booked directly, with clear pricing up front, so getting started is as easy as reaching out.</p>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="gallery.html">Gallery</a>
+  <a href="index.html#services">Services</a>
+  <a href="index.html#about">About</a>
+  <a class="btn btn-solid nav-cta" href="book.html">Start a Project</a>
+  <div class="mobile-menu-foot">
+    <span>Frederick, MD</span>
+    <span>@saenzmediaco</span>
   </div>
 </div>
 
-<footer>
-  <span>Frederick, MD · Serving the DMV</span>
-  <a href="mailto:saenzmediaco@gmail.com">saenzmediaco@gmail.com</a>
-  <a href="https://instagram.com/saenzmediaco" target="_blank" rel="noopener">@saenzmediaco</a>
-  <span>Home</span>
+<header class="hero">
+  <div class="hero-media" id="heroMedia">
+    <img class="active" src="images/full/wedding-11.jpg" alt="Bride and groom walking down the aisle at their wedding reception" loading="eager" fetchpriority="high">
+    <img src="images/full/family-01.jpg" alt="Family posing with a mariachi band" loading="lazy">
+    <img src="images/full/realestate-05.jpg" alt="Two-story house exterior with white siding and covered porch" loading="lazy">
+    <img src="images/full/realestate-01.jpg" alt="Real estate nursery room photo" loading="lazy">
+    <img src="images/full/wedding-17.jpg" alt="Bride and groom sharing an embrace" loading="lazy">
+    <img src="images/full/realestate-06.jpg" alt="Real estate photography" loading="lazy">
+    <img src="images/full/family-02.jpg" alt="Family celebrating together with live mariachi music" loading="lazy">
+    <img src="images/full/wedding-09.jpg" alt="Bride and groom portrait at their wedding" loading="lazy">
+    <img src="images/full/realestate-02.jpg" alt="Real estate photography" loading="lazy">
+    <img src="images/full/realestate-03.jpg" alt="Real estate photography" loading="lazy">
+  </div>
+  <div class="hero-scrim"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Photography &amp; Video · Frederick, MD &amp; the DMV</div>
+    <h1>Elevate<br>your <em>vision.</em></h1>
+    <p class="hero-sub">Photography, video &amp; creative production for weddings, families, headshots, and real estate. Shot, edited, and delivered.</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="gallery.html">View Our Work <span class="btn-arrow">→</span></a>
+      <a class="btn btn-outline" href="book.html">Start a Project</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>Scroll</div>
+</header>
+
+<section class="section-pad" id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="section-title">Selected<br>Work.</h2>
+      <p class="section-note">A look at recent weddings, engagements, family sessions, headshots, and real estate listings across Frederick and the DMV.</p>
+    </div>
+
+    <div class="portfolio-grid">
+      <a class="p-tile p-lg reveal" href="weddings.html">
+        <img src="images/full/wedding-11.jpg" alt="Bride and groom walking down the aisle at their wedding reception" loading="lazy">
+        <div class="p-tile-scrim"></div>
+        <div class="p-tile-info">
+          <div class="p-tile-cat">Wedding</div>
+          <div class="p-tile-view">View pricing <span class="arr">→</span></div>
+        </div>
+      </a>
+      <a class="p-tile p-tall reveal" href="weddings.html">
+        <img src="images/full/wedding-13.jpg" alt="Bride and groom portrait in a field" loading="lazy">
+        <div class="p-tile-scrim"></div>
+        <div class="p-tile-info">
+          <div class="p-tile-cat">Wedding</div>
+          <div class="p-tile-view">View pricing <span class="arr">→</span></div>
+        </div>
+      </a>
+      <a class="p-tile reveal" href="headshots.html">
+        <img src="images/headshot-02.jpg" alt="Professional headshot portrait" loading="lazy">
+        <div class="p-tile-scrim"></div>
+        <div class="p-tile-info">
+          <div class="p-tile-cat">Headshots</div>
+          <div class="p-tile-view">View pricing <span class="arr">→</span></div>
+        </div>
+      </a>
+      <a class="p-tile reveal" href="engagements.html">
+        <img src="images/engagement-01.jpg" alt="Engaged couple laughing together in the woods" loading="lazy">
+        <div class="p-tile-scrim"></div>
+        <div class="p-tile-info">
+          <div class="p-tile-cat">Engagement</div>
+          <div class="p-tile-view">View pricing <span class="arr">→</span></div>
+        </div>
+      </a>
+      <a class="p-tile p-wide reveal" href="real-estate.html">
+        <img src="images/realestate-05.jpg" alt="Two-story house exterior with white siding and covered porch" loading="lazy">
+        <div class="p-tile-scrim"></div>
+        <div class="p-tile-info">
+          <div class="p-tile-cat">Real Estate</div>
+          <div class="p-tile-view">View pricing <span class="arr">→</span></div>
+        </div>
+      </a>
+      <a class="p-tile reveal" href="family.html">
+        <img src="images/family-01.jpg" alt="Family posing with a mariachi band" loading="lazy">
+        <div class="p-tile-scrim"></div>
+        <div class="p-tile-info">
+          <div class="p-tile-cat">Family</div>
+          <div class="p-tile-view">View pricing <span class="arr">→</span></div>
+        </div>
+      </a>
+      <a class="p-tile p-tall reveal" href="engagements.html">
+        <img src="images/engagement-13.jpg" alt="Engagement photography" loading="lazy">
+        <div class="p-tile-scrim"></div>
+        <div class="p-tile-info">
+          <div class="p-tile-cat">Engagement</div>
+          <div class="p-tile-view">View pricing <span class="arr">→</span></div>
+        </div>
+      </a>
+      <a class="p-tile reveal" href="weddings.html">
+        <img src="images/full/wedding-07.jpg" alt="Bride and groom smiling on stage at their reception" loading="lazy">
+        <div class="p-tile-scrim"></div>
+        <div class="p-tile-info">
+          <div class="p-tile-cat">Wedding</div>
+          <div class="p-tile-view">View pricing <span class="arr">→</span></div>
+        </div>
+      </a>
+    </div>
+
+    <div class="portfolio-more reveal">
+      <a class="btn btn-outline" href="gallery.html">Full Gallery <span class="btn-arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad bg-alt" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="section-title">Services.</h2>
+      <p class="section-note">Five ways we help you keep the moments that matter. Real, published pricing, no guessing.</p>
+    </div>
+
+    <div class="services-list">
+      <a class="service-row reveal" href="weddings.html">
+        <span class="service-num">01</span>
+        <span class="service-main">
+          <span class="service-name">Weddings</span>
+          <span class="service-desc">Full-day coverage, engagement sessions, and albums for the day you'll want to relive.</span>
+        </span>
+        <span class="service-price">From $1,650</span>
+        <span class="service-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19L19 5M19 5H8M19 5V16"/></svg></span>
+        <span class="service-thumb"><img src="images/full/wedding-19.jpg" alt="" loading="lazy"></span>
+      </a>
+      <a class="service-row reveal" href="engagements.html">
+        <span class="service-num">02</span>
+        <span class="service-main">
+          <span class="service-name">Engagements</span>
+          <span class="service-desc">Relaxed, romantic sessions to celebrate this season of your story before the big day.</span>
+        </span>
+        <span class="service-price">From $250</span>
+        <span class="service-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19L19 5M19 5H8M19 5V16"/></svg></span>
+        <span class="service-thumb"><img src="images/engagement-11.jpg" alt="" loading="lazy"></span>
+      </a>
+      <a class="service-row reveal" href="family.html">
+        <span class="service-num">03</span>
+        <span class="service-main">
+          <span class="service-name">Family</span>
+          <span class="service-desc">Relaxed sessions built around your family's actual rhythm: golden hour, giggles, and all.</span>
+        </span>
+        <span class="service-price">From $175</span>
+        <span class="service-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19L19 5M19 5H8M19 5V16"/></svg></span>
+        <span class="service-thumb"><img src="images/family-02.jpg" alt="" loading="lazy"></span>
+      </a>
+      <a class="service-row reveal" href="headshots.html">
+        <span class="service-num">04</span>
+        <span class="service-main">
+          <span class="service-name">Headshots</span>
+          <span class="service-desc">Confident, polished headshots for LinkedIn, teams, and personal branding.</span>
+        </span>
+        <span class="service-price">From $150</span>
+        <span class="service-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19L19 5M19 5H8M19 5V16"/></svg></span>
+        <span class="service-thumb"><img src="images/headshot-03.jpg" alt="" loading="lazy"></span>
+      </a>
+      <a class="service-row reveal" href="real-estate.html">
+        <span class="service-num">05</span>
+        <span class="service-main">
+          <span class="service-name">Real Estate</span>
+          <span class="service-desc">HDR photos, cinematic walkthroughs, and drone coverage that help listings sell faster.</span>
+        </span>
+        <span class="service-price">From $175</span>
+        <span class="service-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19L19 5M19 5H8M19 5V16"/></svg></span>
+        <span class="service-thumb"><img src="images/realestate-02.jpg" alt="" loading="lazy"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-media reveal">
+        <div class="about-photo">
+          <img src="images/about-gigi.jpg" alt="Gigi Saenz, founder and photographer at Saenz Media Co." loading="lazy">
+          <div class="about-media-tag">Gigi Saenz</div>
+        </div>
+        <div class="about-photo">
+          <img src="images/about-yelsin.jpg" alt="Yelsin Saenz, Saenz Media Co." loading="lazy">
+          <div class="about-media-tag">Yelsin Saenz</div>
+        </div>
+      </div>
+      <div class="about-copy reveal">
+        <div class="eyebrow">About Us</div>
+        <h2 class="section-title" style="margin-bottom:28px;">Built to tell<br>your story.</h2>
+        <p>We're Saenz Media Co., a small, dedicated team based in Frederick, MD, serving the greater DMV.</p>
+        <p>We started this because we genuinely love capturing the moments people actually want to hold onto. Weddings, growing families, headshots that actually look like you, listings that need to shine. We bring the same care and attention to every shoot, no matter the size.</p>
+        <p>Every package is built to be booked directly, with clear pricing up front, so getting started is as easy as reaching out.</p>
+        <div class="about-loc">Frederick, MD · Serving the DMV</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad-sm bg-alt">
+  <div class="container">
+    <div class="values-grid reveal">
+      <div class="value-cell">
+        <div class="value-num">01</div>
+        <div class="value-title">Personal</div>
+        <p class="value-desc">A small, dedicated team based in Frederick, MD, not a franchise.</p>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">02</div>
+        <div class="value-title">Careful</div>
+        <p class="value-desc">The same care and attention on every shoot, no matter the size.</p>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">03</div>
+        <div class="value-title">Transparent</div>
+        <p class="value-desc">Clear pricing up front. Booking is as easy as reaching out.</p>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">04</div>
+        <div class="value-title">Local</div>
+        <p class="value-desc">Frederick, MD based, serving the greater DMV.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2 class="section-title">In Their<br>Words.</h2>
+    </div>
+    <div class="testimonial-empty reveal">
+      <p>Client stories, coming soon.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container reveal">
+    <h2>Let's create<br>something worth<br>remembering.</h2>
+    <a class="btn btn-solid" href="book.html">Start a Project <span class="btn-arrow">→</span></a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div>
+      <img class="footer-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co.">
+      <div class="footer-tagline">Photography · Video · Creative Production</div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Explore</div>
+        <a href="gallery.html">Gallery</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="book.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <a href="mailto:saenzmediaco@gmail.com">saenzmediaco@gmail.com</a>
+        <a href="https://instagram.com/saenzmediaco" target="_blank" rel="noopener">@saenzmediaco</a>
+        <span>Frederick, MD · Serving the DMV</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© Saenz Media Co.</span>
+    <span>Frederick, MD &amp; the DMV</span>
+  </div>
 </footer>
 
-<script>
-(function(){
-  const banner = document.getElementById('banner');
-  const timers = [];
-
-  function initTile(tile, i){
-    const slides = tile.querySelectorAll('.tile-slide');
-    if (slides.length < 2) return;
-    let current = Array.from(slides).findIndex(s => s.classList.contains('active'));
-    timers[i] = setInterval(() => {
-      slides[current].classList.remove('active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('active');
-    }, 4200);
-  }
-
-  banner.querySelectorAll('.banner-tile').forEach((tile, i) => {
-    setTimeout(() => initTile(tile, i), i * 1400);
-  });
-
-  banner.addEventListener('mouseenter', () => timers.forEach(t => clearInterval(t)));
-  banner.addEventListener('mouseleave', () => {
-    banner.querySelectorAll('.banner-tile').forEach(initTile);
-  });
-})();
-</script>
-
-<script>
-(function(){
-  const menuToggle = document.getElementById('menuToggle');
-  const siteNav = document.getElementById('siteNav');
-  menuToggle.addEventListener('click', () => {
-    const isOpen = siteNav.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-})();
-</script>
-
+<script src="main.js"></script>
 </body>
 </html>

@@ -8,336 +8,130 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#FBF7EC;
-    --card:#FFFDF6;
-    --ink:#132A3A;
-    --ink-soft:#51697A;
-    --line:#D7E1E6;
-    --blue:#082A18;
-    --blue-deep:#062213;
-    --blue-accent:#1C7A4C;
-    --cream:#F2EFB3;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Work Sans',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;}
-
-  /* Masthead */
-  .masthead{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 6%;
-    background:var(--blue);
-    border-bottom:1px solid var(--blue-deep);
-    flex-wrap:wrap;
-    gap:12px;
-  }
-  .brand{
-    display:flex;
-    align-items:flex-start;
-    text-decoration:none;
-  }
-  .brand-tagline{margin-top:11px;}
-  .brand-logo{
-    height:40px;
-    width:auto;
-    display:block;
-    margin-top:3px;
-  }
-  .brand-tagline{
-    position:relative;
-    display:inline-block;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.68rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    text-decoration:none;
-    color:var(--cream);
-    padding-left:16px;
-    margin-left:16px;
-    white-space:nowrap;
-  }
-  .brand-tagline::before{
-    content:'';
-    position:absolute;
-    left:0;top:50%;
-    transform:translateY(-50%);
-    width:1px;
-    height:28px;
-    background:rgba(255,255,255,0.3);
-  }
-  .menu-toggle{
-    display:none;
-    background:none;border:none;cursor:pointer;
-    padding:4px;color:#fff;
-    align-items:center;justify-content:center;
-  }
-  .menu-toggle svg{width:24px;height:24px;}
-  nav{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-    flex:1 1 auto;
-    gap:10px 20px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.82rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-  }
-  nav a{text-decoration:none;color:rgba(255,255,255,0.8);padding-bottom:4px;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
-  nav a:hover{color:#fff;border-color:#fff;}
-  nav a.active{color:#fff;border-color:var(--cream);}
-
-  /* Hero */
-  .hero{padding:40px 6% 44px;max-width:920px;}
-  .eyebrow{
-    display:flex;align-items:center;gap:8px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;
-    color:var(--blue-accent);margin-bottom:22px;
-  }
-  .eyebrow::before{content:'';width:7px;height:7px;background:var(--blue-accent);border-radius:50%;display:inline-block;}
-  h1{
-    font-family:'Inter',sans-serif;
-    font-weight:900;
-    text-transform:uppercase;
-    font-size:clamp(28px,5.6vw,52px);
-    line-height:1.08;
-    margin:0 0 22px;
-    letter-spacing:-0.02em;
-  }
-  .hero p{
-    font-size:1.1rem;
-    line-height:1.6;
-    color:var(--ink-soft);
-    max-width:56ch;
-    margin:0;
-  }
-
-  /* Sprocket divider */
-  .sprockets{
-    height:8px;
-    margin:44px 6%;
-    background-image:radial-gradient(circle, var(--line) 2px, transparent 2.6px);
-    background-size:20px 100%;
-    background-repeat:repeat-x;
-    background-position:left center;
-  }
-
-  /* Form */
-  .book-form{
-    margin:0 auto 90px;
-    max-width:640px;
-    width:88%;
-    border:1px solid var(--line);
-    background:var(--card);
-    padding:40px 36px;
-  }
-  .field{margin-bottom:22px;}
-  .field:last-of-type{margin-bottom:0;}
-  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-  label{
-    display:block;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;
-    color:var(--ink-soft);margin-bottom:8px;
-  }
-  label .req{color:var(--blue-accent);}
-  input,select,textarea{
-    width:100%;
-    font-family:'Work Sans',sans-serif;
-    font-size:0.95rem;
-    color:var(--ink);
-    background:var(--paper);
-    border:1px solid var(--line);
-    padding:11px 12px;
-    outline:none;
-    transition:border-color .2s;
-  }
-  input:focus,select:focus,textarea:focus{border-color:var(--blue-accent);}
-  textarea{resize:vertical;min-height:110px;font-family:'Work Sans',sans-serif;}
-  select{appearance:none;background-image:linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);background-position:calc(100% - 18px) center, calc(100% - 13px) center;background-size:5px 5px, 5px 5px;background-repeat:no-repeat;}
-  .submit{
-    display:block;width:100%;text-align:center;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;
-    padding:15px;border:1px solid var(--blue);
-    background:var(--blue);color:#fff;
-    cursor:pointer;transition:background .2s,color .2s;
-    margin-top:30px;
-  }
-  .submit:hover{background:var(--paper);color:var(--blue-accent);}
-  .form-note{
-    margin-top:14px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.7rem;color:var(--ink-soft);text-align:center;
-  }
-
-  footer{
-    background:var(--blue);
-    border-top:1px solid var(--blue-deep);
-    padding:26px 6%;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.75);
-  }
-  footer a{color:var(--cream);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
-  footer a:hover{color:#fff;border-color:#fff;}
-
-  @media (max-width:990px){
-    .menu-toggle{display:flex;}
-    nav{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:0;order:3;margin-top:12px;}
-    nav.open{display:flex;}
-    nav a{width:100%;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,0.25);}
-    nav a:last-child{border-bottom:none;}
-  }
-  @media (max-width:560px){
-    .field-row{grid-template-columns:1fr;}
-    .book-form{padding:30px 22px;}
-  }
-  @media (max-width:420px){
-    .brand-logo{height:32px;}
-  }
-  @media (max-width:340px){
-    .brand-tagline{
-      font-size:0.48rem;
-      letter-spacing:0.05em;
-      padding-left:10px;
-      margin-left:10px;
-    }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="masthead">
-  <a class="brand" href="index.html">
-    <img class="brand-logo" src="images/logo-mark.png" alt="Saenz Media Co.">
-    <span class="brand-tagline">Elevate Your Vision</span>
-  </a>
+<nav class="site-nav" id="siteNav">
+  <a class="nav-mark" href="index.html"><img class="nav-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co."></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="gallery.html">Gallery</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#about">About</a>
+    </div>
+    <a class="nav-cta" href="book.html">Start a Project</a>
+  </div>
   <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <span></span><span></span><span></span>
   </button>
-  <nav id="siteNav">
-    <a href="index.html">Home</a>
-    <a href="engagements.html">Engagements</a>
-    <a href="weddings.html">Weddings</a>
-    <a href="family.html">Family</a>
-    <a href="headshots.html">Headshots</a>
-    <a href="real-estate.html">Real Estate</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="book.html" class="active">Book</a>
-  </nav>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="gallery.html">Gallery</a>
+  <a href="index.html#services">Services</a>
+  <a href="index.html#about">About</a>
+  <a class="btn btn-solid nav-cta" href="book.html">Start a Project</a>
+  <div class="mobile-menu-foot">
+    <span>Frederick, MD</span>
+    <span>@saenzmediaco</span>
+  </div>
 </div>
 
-<div class="hero">
-  <div class="eyebrow">Booking Request</div>
-  <h1>Let's book your date.</h1>
-  <p>Fill out the form below with a few details about what you need. I'll follow up within 1-2 business days with availability and next steps.</p>
-</div>
+<header class="hero hero-inner" style="padding-top:150px;">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Booking Request</div>
+    <h1>Let's book<br>your date.</h1>
+    <p class="hero-sub">Fill out the form below with a few details about what you need. I'll follow up within 1-2 business days with availability and next steps.</p>
+  </div>
+</header>
 
-<div class="sprockets"></div>
+<section class="section-pad-sm">
+  <div class="container">
 
-<form class="book-form" id="bookForm">
-  <div class="field-row">
-    <div class="field">
-      <label for="name">Full name <span class="req">*</span></label>
-      <input type="text" id="name" name="name" required>
+    <form class="book-form reveal" id="bookForm">
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Full name <span class="req">*</span></label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+        <div class="field">
+          <label for="sessionType">Session type <span class="req">*</span></label>
+          <select id="sessionType" name="sessionType" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="Wedding">Wedding</option>
+            <option value="Engagement">Engagement</option>
+            <option value="Family">Family</option>
+            <option value="Headshots">Headshots</option>
+            <option value="Real Estate">Real Estate</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="date">Preferred date</label>
+          <input type="date" id="date" name="date">
+        </div>
+        <div class="field">
+          <label for="location">Location / venue</label>
+          <input type="text" id="location" name="location">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="details">Details</label>
+        <textarea id="details" name="details" placeholder="Package interest, guest count, timeline, anything that helps me plan."></textarea>
+      </div>
+
+      <button type="submit" class="submit">Send booking request</button>
+      <div class="form-note">Opens your email app, addressed to saenzmediaco@gmail.com</div>
+    </form>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div>
+      <img class="footer-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co.">
+      <div class="footer-tagline">Photography · Video · Creative Production</div>
     </div>
-    <div class="field">
-      <label for="email">Email <span class="req">*</span></label>
-      <input type="email" id="email" name="email" required>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Explore</div>
+        <a href="gallery.html">Gallery</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="book.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <a href="mailto:saenzmediaco@gmail.com">saenzmediaco@gmail.com</a>
+        <a href="https://instagram.com/saenzmediaco" target="_blank" rel="noopener">@saenzmediaco</a>
+        <span>Frederick, MD · Serving the DMV</span>
+      </div>
     </div>
   </div>
-
-  <div class="field-row">
-    <div class="field">
-      <label for="phone">Phone</label>
-      <input type="tel" id="phone" name="phone">
-    </div>
-    <div class="field">
-      <label for="sessionType">Session type <span class="req">*</span></label>
-      <select id="sessionType" name="sessionType" required>
-        <option value="" disabled selected>Select one</option>
-        <option value="Wedding">Wedding</option>
-        <option value="Engagement">Engagement</option>
-        <option value="Family">Family</option>
-        <option value="Headshots">Headshots</option>
-        <option value="Real Estate">Real Estate</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
+  <div class="footer-bottom">
+    <span>© Saenz Media Co.</span>
+    <span>Frederick, MD &amp; the DMV</span>
   </div>
-
-  <div class="field-row">
-    <div class="field">
-      <label for="date">Preferred date</label>
-      <input type="date" id="date" name="date">
-    </div>
-    <div class="field">
-      <label for="location">Location / venue</label>
-      <input type="text" id="location" name="location">
-    </div>
-  </div>
-
-  <div class="field">
-    <label for="details">Details</label>
-    <textarea id="details" name="details" placeholder="Package interest, guest count, timeline, anything that helps me plan."></textarea>
-  </div>
-
-  <button type="submit" class="submit">Send booking request</button>
-  <div class="form-note">Opens your email app, addressed to saenzmediaco@gmail.com</div>
-</form>
-
-<footer>
-  <span>Frederick, MD · Serving the DMV</span>
-  <a href="mailto:saenzmediaco@gmail.com">saenzmediaco@gmail.com</a>
-  <a href="https://instagram.com/saenzmediaco" target="_blank" rel="noopener">@saenzmediaco</a>
-  <span>Book</span>
 </footer>
 
-<script>
-document.getElementById('bookForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const f = e.target;
-  const sessionType = f.sessionType.value || 'General';
-  const lines = [
-    'Name: ' + f.name.value,
-    'Email: ' + f.email.value,
-    'Phone: ' + (f.phone.value || 'N/A'),
-    'Session type: ' + sessionType,
-    'Preferred date: ' + (f.date.value || 'N/A'),
-    'Location / venue: ' + (f.location.value || 'N/A'),
-    '',
-    'Details:',
-    f.details.value || 'N/A'
-  ];
-  const subject = encodeURIComponent('Booking Request - ' + sessionType);
-  const body = encodeURIComponent(lines.join('\n'));
-  window.location.href = 'mailto:saenzmediaco@gmail.com?subject=' + subject + '&body=' + body;
-});
-</script>
-
-<script>
-(function(){
-  const menuToggle = document.getElementById('menuToggle');
-  const siteNav = document.getElementById('siteNav');
-  menuToggle.addEventListener('click', () => {
-    const isOpen = siteNav.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-})();
-</script>
-
+<script src="main.js"></script>
 </body>
 </html>

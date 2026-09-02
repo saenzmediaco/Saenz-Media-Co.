@@ -8,399 +8,96 @@
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#FBF7EC;
-    --card:#FFFDF6;
-    --ink:#132A3A;
-    --ink-soft:#51697A;
-    --line:#D7E1E6;
-    --blue:#082A18;
-    --blue-deep:#062213;
-    --blue-accent:#1C7A4C;
-    --cream:#F2EFB3;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Work Sans',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;}
-
-  /* Masthead */
-  .masthead{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 6%;
-    background:var(--blue);
-    border-bottom:1px solid var(--blue-deep);
-    flex-wrap:wrap;
-    gap:12px;
-  }
-  .brand{
-    display:flex;
-    align-items:flex-start;
-    text-decoration:none;
-  }
-  .brand-tagline{margin-top:11px;}
-  .brand-logo{
-    height:40px;
-    width:auto;
-    display:block;
-    margin-top:3px;
-  }
-  .brand-tagline{
-    position:relative;
-    display:inline-block;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.68rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    text-decoration:none;
-    color:var(--cream);
-    padding-left:16px;
-    margin-left:16px;
-    white-space:nowrap;
-  }
-  .brand-tagline::before{
-    content:'';
-    position:absolute;
-    left:0;top:50%;
-    transform:translateY(-50%);
-    width:1px;
-    height:28px;
-    background:rgba(255,255,255,0.3);
-  }
-  .menu-toggle{
-    display:none;
-    background:none;border:none;cursor:pointer;
-    padding:4px;color:#fff;
-    align-items:center;justify-content:center;
-  }
-  .menu-toggle svg{width:24px;height:24px;}
-  nav{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-    flex:1 1 auto;
-    gap:10px 20px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.82rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-  }
-  nav a{text-decoration:none;color:rgba(255,255,255,0.8);padding-bottom:4px;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
-  nav a:hover{color:#fff;border-color:#fff;}
-  nav a.active{color:#fff;border-color:var(--cream);}
-
-  /* Hero */
-  .hero{padding:40px 6% 44px;max-width:920px;}
-  .eyebrow{
-    display:flex;align-items:center;gap:8px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;
-    color:var(--blue-accent);margin-bottom:22px;
-  }
-  .eyebrow::before{content:'';width:7px;height:7px;background:var(--blue-accent);border-radius:50%;display:inline-block;}
-  h1{
-    font-family:'Inter',sans-serif;
-    font-weight:900;
-    text-transform:uppercase;
-    font-size:clamp(28px,5.2vw,52px);
-    line-height:1.08;
-    margin:0 0 22px;
-    letter-spacing:-0.02em;
-  }
-  .hero p{
-    font-size:1.1rem;
-    line-height:1.6;
-    color:var(--ink-soft);
-    max-width:56ch;
-    margin:0;
-  }
-
-  /* Sprocket divider */
-  .sprockets{
-    height:8px;
-    margin:44px 6%;
-    background-image:radial-gradient(circle, var(--line) 2px, transparent 2.6px);
-    background-size:20px 100%;
-    background-repeat:repeat-x;
-    background-position:left center;
-  }
-
-  .market-note{
-    padding:0 6% 8px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.75rem;
-    color:var(--ink-soft);
-    font-style:italic;
-    max-width:60ch;
-  }
-
-  /* Pricing grid */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-    padding:28px 6% 20px;
-  }
-  .card{
-    position:relative;
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:46px 30px 34px;
-    display:flex;
-    flex-direction:column;
-    transition:transform .25s ease, box-shadow .25s ease;
-  }
-  .card:hover{transform:translateY(-6px);box-shadow:0 16px 32px rgba(27,26,23,0.12);}
-  .card::before{
-    content:'';position:absolute;top:14px;left:14px;width:20px;height:20px;
-    border-top:2px solid var(--ink);border-left:2px solid var(--ink);
-  }
-  .card::after{
-    content:'';position:absolute;bottom:14px;right:14px;width:20px;height:20px;
-    border-bottom:2px solid var(--ink);border-right:2px solid var(--ink);
-  }
-  .card.featured{background:var(--blue);color:#fff;border-color:var(--blue);}
-  .card.featured::before{border-color:#fff;}
-  .card.featured::after{border-color:#fff;}
-  .fstop{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.82rem;
-    letter-spacing:0.08em;
-    color:var(--blue-accent);
-    text-transform:uppercase;
-    margin-bottom:14px;
-  }
-  .card.featured .fstop{color:var(--cream);}
-  .badge{
-    position:absolute;top:14px;right:14px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
-    background:var(--cream);color:var(--ink);padding:4px 8px;
-  }
-  .tier{font-family:'Inter',sans-serif;font-weight:800;text-transform:uppercase;font-size:1.4rem;margin:0 0 6px;}
-  .price{
-    font-family:'IBM Plex Mono',monospace;font-size:2.4rem;font-weight:500;
-    margin:6px 0 4px;
-  }
-  .price-note{font-size:0.78rem;color:var(--ink-soft);margin-bottom:22px;}
-  .card.featured .price-note{color:#CFE9F5;}
-  .features{list-style:none;margin:0 0 30px;padding:0;flex-grow:1;}
-  .features li{
-    padding:9px 0;border-bottom:1px dashed var(--line);
-    font-size:0.94rem;line-height:1.4;
-  }
-  .card.featured .features li{border-bottom-color:rgba(255,255,255,0.28);}
-  .features li:last-child{border-bottom:none;}
-  .cta{
-    display:block;text-align:center;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;
-    padding:14px;border:1px solid var(--blue-accent);
-    text-decoration:none;color:var(--blue-accent);
-    transition:background .2s,color .2s;
-  }
-  .cta:hover{background:var(--blue);color:#fff;}
-  .card.featured .cta{border-color:var(--cream);color:var(--cream);}
-  .card.featured .cta:hover{background:var(--cream);color:var(--blue-accent);}
-
-  /* Spec sheet */
-  .specsheet{margin:56px 6% 90px;border:1px solid var(--line);}
-  .specsheet-head{
-    padding:16px 24px;border-bottom:1px solid var(--line);
-    font-family:'IBM Plex Mono',monospace;font-size:0.76rem;
-    letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);
-  }
-  .spec-row{
-    display:flex;justify-content:space-between;gap:20px;
-    padding:14px 24px;border-bottom:1px dashed var(--line);
-    font-size:0.95rem;
-  }
-  .spec-row:last-child{border-bottom:none;}
-  .spec-row span:last-child{font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);white-space:nowrap;}
-
-  footer{
-    background:var(--blue);
-    border-top:1px solid var(--blue-deep);
-    padding:26px 6%;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.75);
-  }
-  footer a{color:var(--cream);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
-  footer a:hover{color:#fff;border-color:#fff;}
-
-  .grid2{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:22px;
-    padding:28px 6% 20px;
-  }
-  .listcard{
-    position:relative;
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:32px 30px;
-  }
-  .listcard h3{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;
-    color:var(--ink-soft);margin:0 0 18px;
-  }
-  .listcard.wear h3{color:var(--blue-accent);}
-  .listcard.avoid h3{color:var(--ink-soft);}
-  .listcard ul{list-style:none;margin:0;padding:0;}
-  .listcard li{
-    padding:9px 0;border-bottom:1px dashed var(--line);
-    font-size:0.95rem;line-height:1.4;
-  }
-  .listcard li:last-child{border-bottom:none;}
-
-  .section-head{
-    padding:0 6%;
-    font-family:'Inter',sans-serif;font-weight:800;text-transform:uppercase;
-    font-size:1.4rem;margin:64px 0 4px;
-  }
-
-  .timeline{margin:20px 6% 10px;border:1px solid var(--line);}
-  .tl-row{
-    display:flex;gap:26px;padding:18px 24px;border-bottom:1px dashed var(--line);
-  }
-  .tl-row:last-child{border-bottom:none;}
-  .tl-when{
-    font-family:'IBM Plex Mono',monospace;font-size:0.78rem;
-    color:var(--blue-accent);text-transform:uppercase;letter-spacing:0.06em;
-    min-width:130px;flex-shrink:0;
-  }
-  .tl-what{font-size:0.95rem;line-height:1.5;color:var(--ink);}
-
-  .email-box{
-    margin:20px 6% 10px;
-    border:1px solid var(--line);
-    background:var(--card);
-  }
-  .email-box-head{
-    padding:16px 24px;border-bottom:1px solid var(--line);
-    font-family:'IBM Plex Mono',monospace;font-size:0.76rem;
-    letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);
-    display:flex;justify-content:space-between;
-  }
-  .email-body{
-    padding:28px 24px;
-    font-size:0.95rem;line-height:1.75;color:var(--ink);
-    white-space:pre-wrap;
-  }
-  .email-body .sig{color:var(--ink-soft);}
-
-  @media (max-width:990px){
-    .menu-toggle{display:flex;}
-    nav{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:0;order:3;margin-top:12px;}
-    nav.open{display:flex;}
-    nav a{width:100%;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,0.25);}
-    nav a:last-child{border-bottom:none;}
-    .grid{grid-template-columns:1fr;}
-    .grid2{grid-template-columns:1fr;}
-    .tl-row{flex-direction:column;gap:6px;}
-  }
-  @media (max-width:420px){
-    .brand-logo{height:32px;}
-  }
-  @media (max-width:340px){
-    .brand-tagline{
-      font-size:0.48rem;
-      letter-spacing:0.05em;
-      padding-left:10px;
-      margin-left:10px;
-    }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="masthead">
-  <a class="brand" href="index.html">
-    <img class="brand-logo" src="images/logo-mark.png" alt="Saenz Media Co.">
-    <span class="brand-tagline">Elevate Your Vision</span>
-  </a>
+<nav class="site-nav" id="siteNav">
+  <a class="nav-mark" href="index.html"><img class="nav-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co."></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="gallery.html">Gallery</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#about">About</a>
+    </div>
+    <a class="nav-cta" href="book.html">Start a Project</a>
+  </div>
   <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <span></span><span></span><span></span>
   </button>
-  <nav id="siteNav">
-    <a href="index.html">Home</a>
-    <a href="engagements.html">Engagements</a>
-    <a href="weddings.html">Weddings</a>
-    <a href="family.html">Family</a>
-    <a href="headshots.html">Headshots</a>
-    <a href="real-estate.html">Real Estate</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="book.html">Book</a>
-  </nav>
-</div>
+</nav>
 
-<div class="hero">
-  <div class="eyebrow">Before Your Session</div>
-  <h1>Look ready. Feel ready.</h1>
-  <p>A short guide to wardrobe, timing, and what to expect, sent after booking so there are no surprises on session day.</p>
-</div>
-
-<div class="sprockets"></div>
-
-<div class="section-head">What to wear</div>
-<div class="grid2">
-  <div class="listcard wear">
-    <h3>Do</h3>
-    <ul>
-      <li>Solid colors and jewel tones (navy, burgundy, forest green, charcoal)</li>
-      <li>Well-fitted clothing, especially through the shoulders and collar</li>
-      <li>Bring 2-3 outfit options if your package includes multiple looks</li>
-      <li>Subtle, simple jewelry</li>
-      <li>Matte skin: a light powder helps cut shine under studio light</li>
-    </ul>
-  </div>
-  <div class="listcard avoid">
-    <h3>Avoid</h3>
-    <ul>
-      <li>All-white or all-black (both are hard to light well)</li>
-      <li>Busy patterns, stripes, or logos</li>
-      <li>Clothing that closely matches the background color</li>
-      <li>Anything brand-new and unworn: comfort shows on camera</li>
-      <li>Heavy, glossy makeup</li>
-    </ul>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="gallery.html">Gallery</a>
+  <a href="index.html#services">Services</a>
+  <a href="index.html#about">About</a>
+  <a class="btn btn-solid nav-cta" href="book.html">Start a Project</a>
+  <div class="mobile-menu-foot">
+    <span>Frederick, MD</span>
+    <span>@saenzmediaco</span>
   </div>
 </div>
 
-<div class="section-head">Session-day timeline</div>
-<div class="timeline">
-  <div class="tl-row">
-    <div class="tl-when">Day before</div>
-    <div class="tl-what">Lay out your outfit(s) and confirm the session time and location. Charge your phone if you're using it for reference shots.</div>
+<header class="hero hero-inner" style="padding-top:150px;">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Before Your Session</div>
+    <h1>Look ready.<br>Feel ready.</h1>
+    <p class="hero-sub">A short guide to wardrobe, timing, and what to expect, sent after booking so there are no surprises on session day.</p>
   </div>
-  <div class="tl-row">
-    <div class="tl-when">Morning of</div>
-    <div class="tl-what">Arrive a few minutes early. If hair/makeup isn't included, plan to finish that beforehand. Natural, camera-ready is the goal, not full glam.</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-when">During</div>
-    <div class="tl-what">Expect direction on posing throughout: chin position, shoulder angle, weight distribution. A few different expressions will be captured: approachable, confident, and a natural candid.</div>
-  </div>
-  <div class="tl-row">
-    <div class="tl-when">After</div>
-    <div class="tl-what">Proofs are typically ready within a few business days, delivered through a private online gallery.</div>
-  </div>
-</div>
+</header>
 
-<div class="section-head">Welcome email template</div>
-<div class="email-box">
-  <div class="email-box-head"><span>Subject: Getting ready for your headshot session</span><span>Copy &amp; send</span></div>
-  <div class="email-body">Hi [Client Name],
+<section class="section-pad-sm">
+  <div class="container">
+
+    <h2 class="inner-section-head reveal">What to wear</h2>
+    <div class="grid2 reveal">
+      <div class="listcard wear">
+        <h3>Do</h3>
+        <ul>
+          <li>Solid colors and jewel tones (navy, burgundy, forest green, charcoal)</li>
+          <li>Well-fitted clothing, especially through the shoulders and collar</li>
+          <li>Bring 2-3 outfit options if your package includes multiple looks</li>
+          <li>Subtle, simple jewelry</li>
+          <li>Matte skin: a light powder helps cut shine under studio light</li>
+        </ul>
+      </div>
+      <div class="listcard avoid">
+        <h3>Avoid</h3>
+        <ul>
+          <li>All-white or all-black (both are hard to light well)</li>
+          <li>Busy patterns, stripes, or logos</li>
+          <li>Clothing that closely matches the background color</li>
+          <li>Anything brand-new and unworn: comfort shows on camera</li>
+          <li>Heavy, glossy makeup</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="inner-section-head reveal">Session-day timeline</h2>
+    <div class="timeline reveal">
+      <div class="tl-row">
+        <div class="tl-when">Day before</div>
+        <div class="tl-what">Lay out your outfit(s) and confirm the session time and location. Charge your phone if you're using it for reference shots.</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Morning of</div>
+        <div class="tl-what">Arrive a few minutes early. If hair/makeup isn't included, plan to finish that beforehand. Natural, camera-ready is the goal, not full glam.</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">During</div>
+        <div class="tl-what">Expect direction on posing throughout: chin position, shoulder angle, weight distribution. A few different expressions will be captured: approachable, confident, and a natural candid.</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">After</div>
+        <div class="tl-what">Proofs are typically ready within a few business days, delivered through a private online gallery.</div>
+      </div>
+    </div>
+
+    <h2 class="inner-section-head reveal">Welcome email template</h2>
+    <div class="email-box reveal">
+      <div class="email-box-head"><span>Subject: Getting ready for your headshot session</span><span>Copy &amp; send</span></div>
+      <div class="email-body">Hi [Client Name],
 
 Excited for your headshot session on [Date] at [Time]! Here's a quick rundown so you feel fully prepared.
 
@@ -420,25 +117,39 @@ Let me know if you have any questions before then. See you soon!
 
 <span class="sig">[Your name]
 Saenz Media Co. · Frederick, MD</span></div>
-</div>
+    </div>
 
-<footer>
-  <span>Frederick, MD · Serving the DMV</span>
-  <a href="mailto:saenzmediaco@gmail.com">saenzmediaco@gmail.com</a>
-  <a href="https://instagram.com/saenzmediaco" target="_blank" rel="noopener">@saenzmediaco</a>
-  <span>Headshots - Session Prep Guide</span>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div>
+      <img class="footer-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co.">
+      <div class="footer-tagline">Photography · Video · Creative Production</div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="footer-col-title">Explore</div>
+        <a href="gallery.html">Gallery</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="book.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <a href="mailto:saenzmediaco@gmail.com">saenzmediaco@gmail.com</a>
+        <a href="https://instagram.com/saenzmediaco" target="_blank" rel="noopener">@saenzmediaco</a>
+        <span>Frederick, MD · Serving the DMV</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© Saenz Media Co.</span>
+    <span>Frederick, MD &amp; the DMV</span>
+  </div>
 </footer>
 
-<script>
-(function(){
-  const menuToggle = document.getElementById('menuToggle');
-  const siteNav = document.getElementById('siteNav');
-  menuToggle.addEventListener('click', () => {
-    const isOpen = siteNav.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-})();
-</script>
-
+<script src="main.js"></script>
 </body>
 </html>
