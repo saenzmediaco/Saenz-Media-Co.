@@ -236,6 +236,22 @@ function track(event, params){
   }, { passive:true });
 })();
 
+/* ---------- Pre-fill booking form from ?type=&package= (service page "Inquire" links) ---------- */
+(function prefillBookForm(){
+  const form = document.getElementById('bookForm');
+  if(!form) return;
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get('type');
+  const pkg = params.get('package');
+  if (type && form.sessionType) {
+    const match = Array.from(form.sessionType.options).find(o => o.value === type);
+    if (match) form.sessionType.value = type;
+  }
+  if (pkg && form.details && !form.details.value) {
+    form.details.value = `Interested in the ${pkg} package.`;
+  }
+})();
+
 /* ---------- Booking form → Web3Forms ---------- */
 (function bookForm(){
   const form = document.getElementById('bookForm');
