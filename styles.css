@@ -373,16 +373,16 @@ section{position:relative;}
 }
 
 /* ---------- Business & Branding ---------- */
-.biz-grid{display:grid;grid-template-columns:1fr 0.85fr;gap:72px;align-items:center;}
+.biz-grid{display:grid;grid-template-columns:1.4fr 0.6fr;gap:56px;align-items:center;}
 .biz-copy p{font-size:1.05rem;line-height:1.75;color:var(--text-soft);font-weight:300;margin:22px 0 0;max-width:52ch;}
 .biz-tags{display:flex;flex-wrap:wrap;gap:10px;margin:34px 0 38px;}
 .biz-tag{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-soft);border:1px solid var(--line);padding:9px 16px;}
-.biz-media{display:flex;flex-direction:column;gap:14px;}
+.biz-media{display:flex;flex-direction:column;gap:14px;max-width:340px;margin-left:auto;}
 .biz-media img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 25%;background:var(--bg-3);}
 .biz-media img.portrait{aspect-ratio:4/5;object-position:top center;}
 @media (max-width:900px){
   .biz-grid{grid-template-columns:1fr;gap:36px;}
-  .biz-media{flex-direction:row;}
+  .biz-media{flex-direction:row;max-width:none;margin-left:0;}
 }
 
 /* ---------- Process ---------- */
