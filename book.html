@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book a Session - Saenz Media Co.</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C0PWP4XGYT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-C0PWP4XGYT');
+</script>
+<title>Start a Project | Saenz Media Co. — Frederick, MD</title>
+<meta name="description" content="Start a project with Saenz Media Co. Tell us about your wedding, event, branding, or real estate photography and video needs in Frederick, MD and the DMV.">
 <link rel="icon" type="image/png" href="images/apple-touch-icon.png?v=2">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,9 +50,9 @@
 
 <header class="hero hero-inner" style="padding-top:150px;">
   <div class="hero-content">
-    <div class="hero-eyebrow">Booking Request</div>
-    <h1>Let's book<br>your date.</h1>
-    <p class="hero-sub">Fill out the form below with a few details about what you need. I'll follow up within 1-2 business days with availability and next steps.</p>
+    <div class="hero-eyebrow">Start a Project</div>
+    <h1>Let's create something<br>worth remembering.</h1>
+    <p class="hero-sub">Tell us what you're planning, what you need, and what you're envisioning. We'll take it from there, and follow up within 1-2 business days.</p>
   </div>
 </header>
 
@@ -51,6 +60,11 @@
   <div class="container">
 
     <form class="book-form reveal" id="bookForm">
+      <input type="hidden" name="access_key" value="8220947b-17f3-4821-ae34-60edd358516f">
+      <input type="hidden" name="subject" value="New Project Inquiry — Saenz Media Co.">
+      <input type="hidden" name="from_name" value="Saenz Media Co. Website">
+      <input type="checkbox" name="botcheck" class="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
       <div class="field-row">
         <div class="field">
           <label for="name">Full name <span class="req">*</span></label>
@@ -64,18 +78,21 @@
 
       <div class="field-row">
         <div class="field">
-          <label for="phone">Phone</label>
-          <input type="tel" id="phone" name="phone">
+          <label for="phone">Phone <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" required>
         </div>
         <div class="field">
-          <label for="sessionType">Session type <span class="req">*</span></label>
+          <label for="sessionType">What are you looking for? <span class="req">*</span></label>
           <select id="sessionType" name="sessionType" required>
             <option value="" disabled selected>Select one</option>
             <option value="Wedding">Wedding</option>
             <option value="Engagement">Engagement</option>
             <option value="Family">Family</option>
             <option value="Headshots">Headshots</option>
+            <option value="Branding">Branding</option>
             <option value="Real Estate">Real Estate</option>
+            <option value="Video">Video</option>
+            <option value="Creative Production">Creative Production</option>
             <option value="Other">Other</option>
           </select>
         </div>
@@ -83,23 +100,24 @@
 
       <div class="field-row">
         <div class="field">
-          <label for="date">Preferred date</label>
+          <label for="date">Project / event date</label>
           <input type="date" id="date" name="date">
         </div>
         <div class="field">
-          <label for="location">Location / venue</label>
+          <label for="location">Location</label>
           <input type="text" id="location" name="location">
         </div>
       </div>
 
       <div class="field">
-        <label for="details">Details</label>
-        <textarea id="details" name="details" placeholder="Package interest, guest count, timeline, anything that helps me plan."></textarea>
+        <label for="details">Tell us about your project</label>
+        <textarea id="details" name="details" placeholder="Package interest, guest count, timeline, anything that helps us plan."></textarea>
       </div>
 
-      <button type="submit" class="submit">Send booking request</button>
-      <div class="form-note">Opens your email app, addressed to saenzmediaco@gmail.com</div>
+      <button type="submit" class="submit">Start a Project →</button>
+      <div class="form-note">We'll follow up within 1-2 business days.</div>
     </form>
+    <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
 
   </div>
 </section>
@@ -127,7 +145,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© Saenz Media Co.</span>
+    <span>© 2026 Saenz Media Co.</span>
     <span>Frederick, MD &amp; the DMV</span>
   </div>
 </footer>

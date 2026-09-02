@@ -5,6 +5,21 @@
    components that page actually has.
    ========================================================================== */
 
+function track(event, params){
+  if (typeof gtag === 'function') gtag('event', event, params || {});
+}
+
+(function ctaTracking(){
+  document.querySelectorAll('a[href="book.html"], a[href^="book.html#"]').forEach(el => {
+    el.addEventListener('click', () => {
+      track('start_project_click', {
+        link_text: el.textContent.trim(),
+        page_location: window.location.pathname
+      });
+    });
+  });
+})();
+
 (function stickyNav(){
   const nav = document.querySelector('.site-nav');
   if(!nav) return;
@@ -39,18 +54,42 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();
 
+(function stickyCtaVisibility(){
+  const cta = document.querySelector('.sticky-cta');
+  const hero = document.querySelector('.hero');
+  if(!cta || !hero) return;
+  const onScroll = () => {
+    const heroBottom = hero.getBoundingClientRect().bottom + window.scrollY;
+    cta.classList.toggle('visible', window.scrollY > heroBottom - 120);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive:true });
+})();
+
 (function heroSlideshow(){
   const media = document.getElementById('heroMedia');
   if(!media) return;
   const slides = media.querySelectorAll('img');
   if (slides.length < 2) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const preload = (img) => {
+    if (img && img.dataset.src && !img.src) img.src = img.dataset.src;
+  };
+
   let current = Array.from(slides).findIndex(s => s.classList.contains('active'));
   if (current < 0) current = 0;
+
+  // Give the first slide's own resources (fonts, CSS, itself) room to land
+  // before spending bandwidth on the next slide in line.
+  const idle = window.requestIdleCallback || (fn => setTimeout(fn, 1200));
+  idle(() => preload(slides[(current + 1) % slides.length]));
+
   setInterval(() => {
     slides[current].classList.remove('active');
     current = (current + 1) % slides.length;
     slides[current].classList.add('active');
+    preload(slides[(current + 1) % slides.length]);
   }, 4200);
 })();
 
@@ -131,8 +170,13 @@
   if (!lightbox) return;
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxCap = document.getElementById('lightboxCap');
+  const prevBtn = document.getElementById('lightboxPrev');
+  const nextBtn = document.getElementById('lightboxNext');
 
-  function openLightbox(tile){
+  let visibleTiles = [];
+  let currentIndex = -1;
+
+  function renderTile(tile){
     const img = tile.querySelector('img');
     const cap = tile.querySelector('.cap');
     const thumbSrc = img.getAttribute('src');
@@ -147,11 +191,24 @@
     tryNextExt();
     lightboxImg.alt = img.alt;
     lightboxCap.textContent = cap ? cap.textContent : '';
+  }
+
+  function openLightbox(tile){
+    visibleTiles = Array.from(document.querySelectorAll('.category-group'))
+      .filter(g => g.style.display !== 'none')
+      .flatMap(g => Array.from(g.querySelectorAll('.g-tile')));
+    currentIndex = visibleTiles.indexOf(tile);
+    renderTile(tile);
     lightbox.classList.add('active');
   }
   function closeLightbox(){
     lightbox.classList.remove('active');
     lightboxImg.src = '';
+  }
+  function step(dir){
+    if (!visibleTiles.length) return;
+    currentIndex = (currentIndex + dir + visibleTiles.length) % visibleTiles.length;
+    renderTile(visibleTiles[currentIndex]);
   }
 
   document.querySelectorAll('.g-tile').forEach(tile => {
@@ -159,31 +216,71 @@
   });
   const closeBtn = document.getElementById('lightboxClose');
   if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (prevBtn) prevBtn.addEventListener('click', e => { e.stopPropagation(); step(-1); });
+  if (nextBtn) nextBtn.addEventListener('click', e => { e.stopPropagation(); step(1); });
   lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+
+  let touchStartX = null;
+  lightbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive:true });
+  lightbox.addEventListener('touchend', e => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) step(dx > 0 ? -1 : 1);
+    touchStartX = null;
+  }, { passive:true });
 })();
 
-/* ---------- Booking form → mailto ---------- */
+/* ---------- Booking form → Web3Forms ---------- */
 (function bookForm(){
   const form = document.getElementById('bookForm');
   if(!form) return;
+  const submitBtn = form.querySelector('.submit');
+  const status = document.getElementById('formStatus');
+
+  const setStatus = (msg, kind) => {
+    if(!status) return;
+    status.textContent = msg;
+    status.className = 'form-status' + (kind ? ' ' + kind : '');
+  };
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    const f = e.target;
-    const sessionType = f.sessionType.value || 'General';
-    const lines = [
-      'Name: ' + f.name.value,
-      'Email: ' + f.email.value,
-      'Phone: ' + (f.phone.value || 'N/A'),
-      'Session type: ' + sessionType,
-      'Preferred date: ' + (f.date.value || 'N/A'),
-      'Location / venue: ' + (f.location.value || 'N/A'),
-      '',
-      'Details:',
-      f.details.value || 'N/A'
-    ];
-    const subject = encodeURIComponent('Booking Request - ' + sessionType);
-    const body = encodeURIComponent(lines.join('\n'));
-    window.location.href = 'mailto:saenzmediaco@gmail.com?subject=' + subject + '&body=' + body;
+    if (form.botcheck && form.botcheck.checked) return;
+
+    submitBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = 'Sending…';
+    setStatus('', '');
+    const sessionType = form.sessionType.value;
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          form.reset();
+          form.hidden = true;
+          setStatus("Thanks, that's in. We'll follow up within 1-2 business days.", 'success');
+          track('generate_lead', { method: 'website_form', session_type: sessionType });
+        } else {
+          throw new Error(data.message || 'Submission failed');
+        }
+      })
+      .catch(() => {
+        setStatus('Something went wrong sending that. Please email us directly at saenzmediaco@gmail.com.', 'error');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      });
   });
 })();

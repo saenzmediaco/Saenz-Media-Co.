@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery - Saenz Media Co.</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C0PWP4XGYT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-C0PWP4XGYT');
+</script>
+<title>Gallery | Saenz Media Co. — Frederick, MD Photography &amp; Video</title>
+<meta name="description" content="Browse recent weddings, engagements, family sessions, headshots, and real estate photography from Saenz Media Co., based in Frederick, Maryland.">
 <link rel="icon" type="image/png" href="images/apple-touch-icon.png?v=2">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +21,8 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<a class="sticky-cta" href="book.html">Start a Project →</a>
 
 <nav class="site-nav" id="siteNav">
   <a class="nav-mark" href="index.html"><img class="nav-logo" src="images/logo-mark-transparent-cropped.png" alt="Saenz Media Co."></a>
@@ -197,14 +208,20 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© Saenz Media Co.</span>
+    <span>© 2026 Saenz Media Co.</span>
     <span>Frederick, MD &amp; the DMV</span>
   </div>
 </footer>
 
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightboxClose">Close ✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 19l-7-7 7-7"/></svg>
+  </button>
   <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
   <div class="lightbox-cap" id="lightboxCap"></div>
 </div>
 

@@ -372,6 +372,53 @@ section{position:relative;}
   .about-photo{aspect-ratio:3/4;}
 }
 
+/* ---------- Business & Branding ---------- */
+.biz-grid{display:grid;grid-template-columns:1fr 0.85fr;gap:72px;align-items:center;}
+.biz-copy p{font-size:1.05rem;line-height:1.75;color:var(--text-soft);font-weight:300;margin:22px 0 0;max-width:52ch;}
+.biz-tags{display:flex;flex-wrap:wrap;gap:10px;margin:34px 0 38px;}
+.biz-tag{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-soft);border:1px solid var(--line);padding:9px 16px;}
+.biz-media{display:flex;flex-direction:column;gap:14px;}
+.biz-media img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 25%;background:var(--bg-3);}
+.biz-media img.portrait{aspect-ratio:4/5;object-position:top center;}
+@media (max-width:900px){
+  .biz-grid{grid-template-columns:1fr;gap:36px;}
+  .biz-media{flex-direction:row;}
+}
+
+/* ---------- Process ---------- */
+.process-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);
+}
+.process-cell{background:var(--bg);padding:44px 30px;}
+.process-num{font-family:var(--serif);font-size:0.95rem;color:var(--accent);letter-spacing:0.05em;margin-bottom:22px;}
+.process-title{font-family:var(--sans);font-weight:700;font-size:1.02rem;color:var(--text);margin:0 0 12px;}
+.process-desc{color:var(--text-soft);font-size:0.9rem;line-height:1.6;font-weight:300;margin:0;}
+@media (max-width:860px){
+  .process-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:520px){
+  .process-grid{grid-template-columns:1fr;}
+}
+
+/* ---------- Sticky mobile CTA ---------- */
+.sticky-cta{
+  display:none;
+  align-items:center;justify-content:center;gap:8px;
+  position:fixed;left:4%;right:4%;bottom:0;z-index:220;
+  margin-bottom:calc(14px + env(safe-area-inset-bottom));
+  font-size:0.76rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--bg);background:var(--accent);padding:15px;border-radius:2px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.45);
+  opacity:0;transform:translateY(16px);pointer-events:none;
+  transition:opacity .35s var(--ease), transform .35s var(--ease);
+}
+.sticky-cta.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+@media (max-width:640px){
+  .sticky-cta{display:flex;}
+  body{padding-bottom:74px;}
+}
+
 /* ---------- Why / values ---------- */
 .values-grid{
   display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
@@ -549,6 +596,21 @@ footer.site-footer{
   position:fixed;bottom:26px;left:50%;transform:translateX(-50%);
   font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-soft);
 }
+.lightbox-nav{
+  position:fixed;top:50%;transform:translateY(-50%);
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);background:rgba(10,10,10,0.5);color:var(--text);
+  cursor:pointer;transition:border-color .3s var(--ease), background .3s var(--ease), color .3s var(--ease);
+}
+.lightbox-nav:hover{border-color:var(--accent);background:var(--accent);color:var(--bg);}
+.lightbox-prev{left:5%;}
+.lightbox-next{right:5%;}
+@media (max-width:640px){
+  .lightbox-nav{width:40px;height:40px;}
+  .lightbox-prev{left:3%;}
+  .lightbox-next{right:3%;}
+}
 
 /* ---------- Form (book) ---------- */
 .book-form{max-width:680px;}
@@ -581,7 +643,13 @@ select option{background:var(--bg-2);color:var(--text);}
   margin-top:16px;
 }
 .submit:hover{background:var(--accent);border-color:var(--accent);}
+.submit:disabled{opacity:0.6;cursor:default;}
+.submit:disabled:hover{background:var(--text);border-color:var(--text);}
 .form-note{margin-top:16px;font-size:0.72rem;color:var(--text-faint);text-align:center;}
+.form-status{margin-top:24px;font-size:0.92rem;line-height:1.6;text-align:center;}
+.form-status:empty{display:none;}
+.form-status.success{color:var(--accent);font-family:var(--serif);font-size:1.25rem;font-style:italic;}
+.form-status.error{color:var(--text-soft);}
 
 @media (max-width:640px){
   .field-row{grid-template-columns:1fr;}
